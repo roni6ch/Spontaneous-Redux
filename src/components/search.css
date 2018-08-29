@@ -1,0 +1,44 @@
+h1{font-size:70px;}
+
+.searchBox{
+    width: 500px;
+padding: 1%;
+position: relative;
+margin: 3% auto;
+background: rgba(204, 204, 204, 0.52);
+border-radius: 10px;
+margin-top: 3%;
+}
+.logo {
+    margin: 0 auto;
+    display: block;
+}
+.input-field label.autocomplete-input{color:#000;}
+#currency{position: relative;
+    width: 100px;
+    margin: 0 auto;}
+
+    #currency_code{position: absolute; top:39px !important;}
+    .autocomplete-content{
+        position: absolute;
+    top: 66px !important;
+    }
+    .caret{display:none;}
+    .input-field input ,  .input-field label{color:#000;}
+    .select-wrapper input.select-dropdown{
+        text-align: center;
+        border-bottom: 0px;
+    }
+
+    ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+        color: #000;
+      }
+      ::-moz-placeholder { /* Firefox 19+ */
+        color: #000;
+      }
+      :-ms-input-placeholder { /* IE 10+ */
+        color: #000;
+      }
+      :-moz-placeholder { /* Firefox 18- */
+        color: #000;
+      }
