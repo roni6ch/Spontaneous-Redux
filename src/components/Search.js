@@ -8,12 +8,23 @@ import logo from '../content/images/logo.png';
 import M from 'materialize-css';
 import axios from 'axios';
 import $ from 'jquery';
+import { Redirect } from 'react-router';
+
+
+
 
 
 
 
 
 class Search extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            redirectToReferrer: false
+        }
+
+    }
     componentDidMount() {
         M.FormSelect.init(document.querySelectorAll('select'));
     }
@@ -24,6 +35,9 @@ class Search extends Component {
         this.props.SET_BUDGET(e.target.value);
     }
     render() {
+        if (this.props.submit === true) {
+            return <Redirect to="/results" />
+        }
         return (
 
             <div className="Search">
@@ -77,15 +91,18 @@ function mapStateToProps(state) {
         currency: state.currency,
         budget: state.budget,
         date: state.date,
-        terminal: state.terminal
+        terminal: state.terminal,
+        submit:state.submit
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
         SUBMIT: (event) => {
-            event.preventDefault()
          //change rout to results with new parameters
-         dispatch('/results') /* dispatch an action that changes the browser history */
+         const action = { type: 'SUBMIT', data: true };
+            dispatch(action);
+         
+
         },
         SET_CURRENCY: (currency) => {
             const action = { type: 'SET_CURRENCY', data: currency };

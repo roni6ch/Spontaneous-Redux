@@ -5,7 +5,8 @@ const initialState = {
     terminal: "",
     currency: "",
     date: null,
-    budget: 0
+    budget: 0,
+    submit : false
 }
 
 const reducer = (state = initialState, action) => {
@@ -21,8 +22,9 @@ const reducer = (state = initialState, action) => {
         case 'SET_DATE':
             return Object.assign({}, state, { date: action.data.toLocaleDateString() });
         case 'SUBMIT':
-            //switch router
-        
+            return Object.assign({}, state, { submit: action.data });
+
+
 
 
         default: return state
