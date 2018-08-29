@@ -22,7 +22,7 @@ const reducer = (state = initialState, action) => {
             return Object.assign({}, state, { date: action.data.toLocaleDateString() });
         case 'SUBMIT':
             //switch router
-
+        
 
 
         default: return state

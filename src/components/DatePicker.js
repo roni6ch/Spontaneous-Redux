@@ -23,7 +23,7 @@ class DatePicker1 extends React.Component {
         }
       
         render() {
-          return <DatePicker name="date"
+          return <DatePicker name="date" autoComplete="off"
           placeholderText="Date" 
               selected={this.state.startDate}
               onChange={this.handleChange}

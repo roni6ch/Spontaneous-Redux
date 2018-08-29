@@ -82,10 +82,10 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        SUBMIT: () => {
-            const action = { type: 'SUBMIT' };
-            dispatch(action);
-            //dispatch action
+        SUBMIT: (event) => {
+            event.preventDefault()
+         //change rout to results with new parameters
+         dispatch('/results') /* dispatch an action that changes the browser history */
         },
         SET_CURRENCY: (currency) => {
             const action = { type: 'SET_CURRENCY', data: currency };
