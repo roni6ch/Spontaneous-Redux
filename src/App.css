@@ -7,7 +7,6 @@
   -o-background-size: cover;
   background-size: cover;
   width:100%;
-  position: fixed;
 }
 
 .App-logo {
@@ -30,6 +29,27 @@
   font-size: large;
 }
 
+.fa-rotate-90{
+  -webkit-transform: rotate(90deg);
+  -ms-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+
+.fa-rotate-270{
+  -webkit-transform: rotate(270deg);
+  -ms-transform: rotate(270deg);
+  transform: rotate(270deg);
+}
+.collapsible{padding: 0px !important;}
+
+.collapsible-body{background-color: #fff;}
+.collapsible-header i{margin-right:0px;}
+
+.timeAndstops {
+  text-align: center;
+  color: rgb(253, 78, 78);
+  font-size: 0.9vw;
+}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

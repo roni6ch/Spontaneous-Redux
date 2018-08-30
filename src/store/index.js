@@ -6,7 +6,8 @@ const initialState = {
     currency: "",
     date: null,
     budget: 0,
-    submit : false
+    submit : false,
+    results : []
 }
 
 const reducer = (state = initialState, action) => {
@@ -23,7 +24,10 @@ const reducer = (state = initialState, action) => {
             return Object.assign({}, state, { date: action.data.toLocaleDateString() });
         case 'SUBMIT':
             return Object.assign({}, state, { submit: action.data });
-
+            case 'SET_RESULTS':
+            return Object.assign({}, state, { results: action.data });
+       
+            
 
 
 

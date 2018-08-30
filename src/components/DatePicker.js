@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
 import moment from 'moment';
@@ -44,7 +44,7 @@ function mapDispatchToProps(dispatch) {
           dispatch(action);
       }, 
       SET_DATE: (date) => {
-         var date = moment(date, "MM-DD-YYYY").toDate();
+         date = moment(date, "MM-DD-YYYY").toDate();
         const action = { type: 'SET_DATE', data: date };
         dispatch(action);
     }

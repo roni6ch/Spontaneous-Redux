@@ -6,8 +6,6 @@ import AutoCompleteTeminals from './AutoCompleteTeminals';
 import DatePicker1 from './DatePicker';
 import logo from '../content/images/logo.png';
 import M from 'materialize-css';
-import axios from 'axios';
-import $ from 'jquery';
 import { Redirect } from 'react-router';
 
 
@@ -76,7 +74,6 @@ class Search extends Component {
                         </div>
                         <button type="submit">Submit</button>
 
-                        {this.props.terminal}
                     </div>
                 </form>
             </div>
