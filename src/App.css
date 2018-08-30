@@ -1,13 +1,12 @@
 .App {
   text-align: center;
 
+  background: url('./content/images/bg3.jpg') no-repeat center center fixed;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
   width:100%;   
-  background: rgb(2,0,36);
-background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,116,121,1) 0%, rgba(0,212,255,0.665703781512605) 34%);
 }
 
 .App-logo {
