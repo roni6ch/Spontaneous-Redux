@@ -1,0 +1,444 @@
+
+{
+  "currency" :"USD",
+  "results":  [
+      {
+          "itineraries": [
+     {
+       "outbound": {
+         "duration": "30:10",
+         "flights": [
+           {
+             "departs_at": "2018-12-25T16:40",
+             "arrives_at": "2018-12-25T20:00",
+             "origin": {
+               "airport": "TLV",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LHR",
+               "terminal": "5"
+             },
+             "marketing_airline": "BA",
+             "operating_airline": "BA",
+             "flight_number": "164",
+             "aircraft": "777",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "O",
+               "seats_remaining": 9
+             }
+           },
+           {
+             "departs_at": "2018-12-26T09:35",
+             "arrives_at": "2018-12-26T12:50",
+             "origin": {
+               "airport": "LHR",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LAX",
+               "terminal": "2"
+             },
+             "marketing_airline": "VS",
+             "operating_airline": "VS",
+             "flight_number": "7",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "X",
+               "seats_remaining": 9
+             }
+           }
+         ]
+       }
+     },
+     {
+       "outbound": {
+         "duration": "35:15",
+         "flights": [
+           {
+             "departs_at": "2018-12-25T16:40",
+             "arrives_at": "2018-12-25T20:00",
+             "origin": {
+               "airport": "TLV",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LHR",
+               "terminal": "5"
+             },
+             "marketing_airline": "BA",
+             "operating_airline": "BA",
+             "flight_number": "164",
+             "aircraft": "777",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "O",
+               "seats_remaining": 9
+             }
+           },
+           {
+             "departs_at": "2018-12-26T14:35",
+             "arrives_at": "2018-12-26T17:55",
+             "origin": {
+               "airport": "LHR",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LAX",
+               "terminal": "2"
+             },
+             "marketing_airline": "VS",
+             "operating_airline": "VS",
+             "flight_number": "23",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "X",
+               "seats_remaining": 9
+             }
+           }
+         ]
+       }
+     }
+   ],
+   "fare": {
+     "total_price": "546.32",
+     "price_per_adult": {
+       "total_fare": "546.32",
+       "tax": "220.32"
+     },
+     "restrictions": {
+       "refundable": true,
+       "change_penalties": true
+     }
+   }
+ },
+ {
+   "itineraries": [
+     {
+       "outbound": {
+         "duration": "18:50",
+         "flights": [
+           {
+             "departs_at": "2018-12-25T09:05",
+             "arrives_at": "2018-12-25T12:35",
+             "origin": {
+               "airport": "TLV",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LHR",
+               "terminal": "4"
+             },
+             "marketing_airline": "LY",
+             "operating_airline": "LY",
+             "flight_number": "315",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "G",
+               "seats_remaining": 9
+             }
+           },
+           {
+             "departs_at": "2018-12-25T14:35",
+             "arrives_at": "2018-12-25T17:55",
+             "origin": {
+               "airport": "LHR",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LAX",
+               "terminal": "2"
+             },
+             "marketing_airline": "VS",
+             "operating_airline": "VS",
+             "flight_number": "23",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "X",
+               "seats_remaining": 9
+             }
+           }
+         ]
+       }
+     },
+     {
+       "outbound": {
+         "duration": "37:45",
+         "flights": [
+           {
+             "departs_at": "2018-12-25T09:05",
+             "arrives_at": "2018-12-25T12:35",
+             "origin": {
+               "airport": "TLV",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LHR",
+               "terminal": "4"
+             },
+             "marketing_airline": "LY",
+             "operating_airline": "LY",
+             "flight_number": "315",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "G",
+               "seats_remaining": 9
+             }
+           },
+           {
+             "departs_at": "2018-12-26T09:35",
+             "arrives_at": "2018-12-26T12:50",
+             "origin": {
+               "airport": "LHR",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LAX",
+               "terminal": "2"
+             },
+             "marketing_airline": "VS",
+             "operating_airline": "VS",
+             "flight_number": "7",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "X",
+               "seats_remaining": 9
+             }
+           }
+         ]
+       }
+     }
+   ],
+   "fare": {
+     "total_price": "550.32",
+     "price_per_adult": {
+       "total_fare": "550.32",
+       "tax": "224.32"
+     },
+     "restrictions": {
+       "refundable": true,
+       "change_penalties": true
+     }
+   }
+ },
+ {
+   "itineraries": [
+     {
+       "outbound": {
+         "duration": "29:35",
+         "flights": [
+           {
+             "departs_at": "2018-12-25T17:15",
+             "arrives_at": "2018-12-25T20:45",
+             "origin": {
+               "airport": "TLV",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LHR",
+               "terminal": "4"
+             },
+             "marketing_airline": "LY",
+             "operating_airline": "LY",
+             "flight_number": "317",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "O",
+               "seats_remaining": 9
+             }
+           },
+           {
+             "departs_at": "2018-12-26T09:35",
+             "arrives_at": "2018-12-26T12:50",
+             "origin": {
+               "airport": "LHR",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LAX",
+               "terminal": "2"
+             },
+             "marketing_airline": "VS",
+             "operating_airline": "VS",
+             "flight_number": "7",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "X",
+               "seats_remaining": 9
+             }
+           }
+         ]
+       }
+     },
+     {
+       "outbound": {
+         "duration": "34:40",
+         "flights": [
+           {
+             "departs_at": "2018-12-25T17:15",
+             "arrives_at": "2018-12-25T20:45",
+             "origin": {
+               "airport": "TLV",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LHR",
+               "terminal": "4"
+             },
+             "marketing_airline": "LY",
+             "operating_airline": "LY",
+             "flight_number": "317",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "O",
+               "seats_remaining": 9
+             }
+           },
+           {
+             "departs_at": "2018-12-26T14:35",
+             "arrives_at": "2018-12-26T17:55",
+             "origin": {
+               "airport": "LHR",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "LAX",
+               "terminal": "2"
+             },
+             "marketing_airline": "VS",
+             "operating_airline": "VS",
+             "flight_number": "23",
+             "aircraft": "789",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "X",
+               "seats_remaining": 9
+             }
+           }
+         ]
+       }
+     }
+   ],
+   "fare": {
+     "total_price": "550.32",
+     "price_per_adult": {
+       "total_fare": "550.32",
+       "tax": "224.32"
+     },
+     "restrictions": {
+       "refundable": true,
+       "change_penalties": true
+     }
+   }
+ },
+ {
+   "itineraries": [
+     {
+       "outbound": {
+         "duration": "22:50",
+         "flights": [
+           {
+             "departs_at": "2018-12-25T01:00",
+             "arrives_at": "2018-12-25T06:10",
+             "origin": {
+               "airport": "TLV",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "SVO",
+               "terminal": "D"
+             },
+             "marketing_airline": "SU",
+             "operating_airline": "SU",
+             "flight_number": "505",
+             "aircraft": "333",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "T",
+               "seats_remaining": 7
+             }
+           },
+           {
+             "departs_at": "2018-12-25T12:00",
+             "arrives_at": "2018-12-25T13:50",
+             "origin": {
+               "airport": "SVO",
+               "terminal": "D"
+             },
+             "destination": {
+               "airport": "LAX",
+               "terminal": "B"
+             },
+             "marketing_airline": "SU",
+             "operating_airline": "SU",
+             "flight_number": "106",
+             "aircraft": "332",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "T",
+               "seats_remaining": 7
+             }
+           }
+         ]
+       }
+     },
+     {
+       "outbound": {
+         "duration": "29:00",
+         "flights": [
+           {
+             "departs_at": "2018-12-25T18:50",
+             "arrives_at": "2018-12-26T00:05",
+             "origin": {
+               "airport": "TLV",
+               "terminal": "3"
+             },
+             "destination": {
+               "airport": "SVO",
+               "terminal": "D"
+             },
+             "marketing_airline": "SU",
+             "operating_airline": "SU",
+             "flight_number": "509",
+             "aircraft": "32B",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "T",
+               "seats_remaining": 7
+             }
+           },
+           {
+             "departs_at": "2018-12-26T12:00",
+             "arrives_at": "2018-12-26T13:50",
+             "origin": {
+               "airport": "SVO",
+               "terminal": "D"
+             },
+             "destination": {
+               "airport": "LAX",
+               "terminal": "B"
+             },
+             "marketing_airline": "SU",
+             "operating_airline": "SU",
+             "flight_number": "106",
+             "aircraft": "332",
+             "booking_info": {
+               "travel_class": "ECONOMY",
+               "booking_code": "T",
+               "seats_remaining": 7
+             }
+           }
+         ]
+       }
+     }
+    ]}]}

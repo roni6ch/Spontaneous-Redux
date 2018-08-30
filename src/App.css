@@ -1,12 +1,13 @@
 .App {
   text-align: center;
-  height: 100vw;
-  background: url('./content/images/bg3.jpg') no-repeat center center fixed;
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  width:100%;
+  width:100%;   
+  background: rgb(2,0,36);
+background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,116,121,1) 0%, rgba(0,212,255,0.665703781512605) 34%);
 }
 
 .App-logo {
@@ -28,28 +29,8 @@
 .App-intro {
   font-size: large;
 }
+.wrapper{width:80%; margin: 0 auto;}
 
-.fa-rotate-90{
-  -webkit-transform: rotate(90deg);
-  -ms-transform: rotate(90deg);
-  transform: rotate(90deg);
-}
-
-.fa-rotate-270{
-  -webkit-transform: rotate(270deg);
-  -ms-transform: rotate(270deg);
-  transform: rotate(270deg);
-}
-.collapsible{padding: 0px !important;}
-
-.collapsible-body{background-color: #fff;}
-.collapsible-header i{margin-right:0px;}
-
-.timeAndstops {
-  text-align: center;
-  color: rgb(253, 78, 78);
-  font-size: 0.9vw;
-}
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

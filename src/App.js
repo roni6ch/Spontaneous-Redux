@@ -17,7 +17,7 @@ class App extends Component {
         <div className="App">
 
           <Router  >
-          <div>
+          <div className="wrapper">
             <Route exact path="/" component={Search} />
             <Route path="/results" component={Results} />
             </div>
