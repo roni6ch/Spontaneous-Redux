@@ -27,7 +27,7 @@ class Header extends Component {
                 </nav>
 
                 <ul className="sidenav" id="mobile-demo">
-                    <li>About</li>
+                    <li>  <a href="http://Roni.pe.hu" target="_blank">About</a></li>
                 </ul>
             </div>
         );

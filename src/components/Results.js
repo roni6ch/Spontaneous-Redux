@@ -88,7 +88,7 @@ class Results extends React.Component {
                     .map((result, index) => {
                         return (result.itineraries.map((r, i) => {
                             return (
-                                <ul className="collapsible col s6 z-depth-3" key={i}>
+                                <ul className="collapsible col s12 m6 z-depth-3" key={i}>
                                     {/* li header */}
                                     <li>
 
@@ -275,9 +275,9 @@ function mapDispatchToProps(dispatch) {
             dispatch(action);
 
             axios
-            // .get('./data/flights2.json', {}) max_price works only with currency=USD!
-                .get(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=ikb2WCbOOrKkFf5biRa1GmuoGObAz9L7
-               &currency=${currency}&max_price=${budget}&origin=${terminal}&destination=${terminalDest}&departure_date=${date}&return_date=${return_date}&number_of_results=${resultsNumber}`, {})
+           //  .get('./data/flights2.json', {}) 
+             //max_price works only with currency=USD!
+                .get(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=ikb2WCbOOrKkFf5biRa1GmuoGObAz9L7&currency=${currency}&max_price=${budget}&origin=${terminal}&destination=${terminalDest}&departure_date=${date}&return_date=${return_date}&number_of_results=${resultsNumber}`, {})
                 .then(function (response) {
                     console.log(response.data.results);
                     const action = {

@@ -33,7 +33,7 @@
   }
   .collapsible:hover{opacity:0.9}
   .resultsFilter{
-    width: 500px;    padding: 1%;
+    max-width: 640px;  padding: 1%;
     margin-top: 10px;
     background: #ccc;
     border-radius: 10px;
@@ -49,3 +49,5 @@
 .collapsible-body span {
   margin: 0px 5px;
 }
+
+
