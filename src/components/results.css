@@ -17,7 +17,9 @@
     -ms-transform: rotate(270deg);
     transform: rotate(270deg);
   }
-  .collapsible{padding: 0px !important;}
+  .collapsible{padding: 0px !important;
+  
+    border-right: 4px solid #000 !important;}
   
   .collapsible-body{background-color: #fff;}
   .collapsible-header i{margin-right:0px;}
@@ -27,5 +29,23 @@
     color: rgb(253, 78, 78);
     font-size: 0.9vw;
     width:100%;
+    text-align: center;
   }
   .collapsible:hover{opacity:0.9}
+  .resultsFilter{
+    width: 500px;    padding: 1%;
+    margin-top: 10px;
+    background: #ccc;
+    border-radius: 10px;
+  }
+  
+.react-datepicker-popper{
+  
+  z-index: 11;
+}
+.collapsible-headerspan {
+  margin: 0px 2px;
+}
+.collapsible-body span {
+  margin: 0px 5px;
+}

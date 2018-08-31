@@ -1,13 +1,17 @@
+body{
+  height: 100%;
+  background-color:black;
+background-image:
+radial-gradient(white, rgba(255,255,255,.2) 2px, transparent 40px),
+radial-gradient(white, rgba(255,255,255,.15) 1px, transparent 30px),
+radial-gradient(white, rgba(255,255,255,.1) 2px, transparent 40px),
+radial-gradient(rgba(255,255,255,.4), rgba(255,255,255,.1) 2px, transparent 30px);
+background-size: 550px 550px, 350px 350px, 250px 250px, 150px 150px; 
+background-position: 0 0, 40px 60px, 130px 270px, 70px 100px;
+}
 .App {
   text-align: center;
-
-  background: url('./content/images/bg3.jpg') no-repeat center center fixed;
-  -webkit-background-size: cover;
-  -moz-background-size: cover;
-  -o-background-size: cover;
-  background-size: cover;
-  width:100%;   
-}
+  }
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
@@ -30,8 +34,60 @@
 }
 .wrapper{width:80%; margin: 0 auto;}
 
-
+.brand-logo img{width:75px;}
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+
+.react-autosuggest__input{position: relative;}
+#react-autowhatever-1{
+  background: #2b72aa;
+  color: #fff;
+  cursor: pointer;
+  text-align: center;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+  z-index: 99;
+}
+.react-autosuggest__suggestions-list li{
+  border-bottom: 1px solid #fff;
+}
+.react-autosuggest__suggestions-list li:hover{opacity:0.8;}
+
+
+
+
+/*spinner*/.lds-hourglass {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+.lds-hourglass:after {
+  content: " ";
+  display: block;
+  border-radius: 50%;
+  width: 0;
+  height: 0;
+  margin: 6px;
+  box-sizing: border-box;
+  border: 26px solid #cef;
+  border-color: #cef transparent #cef transparent;
+  animation: lds-hourglass 1.2s infinite;
+}
+@keyframes lds-hourglass {
+  0% {
+    transform: rotate(0);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+  50% {
+    transform: rotate(900deg);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+  100% {
+    transform: rotate(1800deg);
+  }
 }

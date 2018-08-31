@@ -10,31 +10,43 @@ class DatePicker1 extends React.Component {
         constructor (props) {
           super(props)
           this.state = {
-            startDate: null
+            startDate: null,
+            endDate : null
           };
           this.handleChange = this.handleChange.bind(this);
         }
       
         handleChange(date) {
-            this.props.SET_DATE(date);
+            this.props.SET_DATE(date , this.props.dateInput);
+            if ( this.props.dateInput  === "date")
           this.setState({
             startDate: date
           });
+          else
+          this.setState({
+            endDate: date
+          });
         }
       
+         convertDate(date){
+          return date.toDate().getFullYear() +  "/" + (date.getMonth() + 1) +   "/" +  date.getDate()
+        }
         render() {
-          return <DatePicker name="date" autoComplete="off"
+          return <div className="col s6">
+          <DatePicker name="date" autoComplete="off" require="true"
           placeholderText="Date" 
-              selected={this.state.startDate}
+              selected={this.props.dateInput === "date" ? this.state.startDate : this.state.endDate} 
+              value={this.props.dateInput === "date" ? this.props.date : this.props.return_date}
               onChange={this.handleChange}
-          />;
+          /></div>;
         }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DatePicker1);
 
 function mapStateToProps(state) {
   return {
-    date: state.date
+    date: state.date,
+    return_date : state.return_date
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -43,9 +55,12 @@ function mapDispatchToProps(dispatch) {
           const action = { type: 'SET_TERMINAL', data: terminal };
           dispatch(action);
       }, 
-      SET_DATE: (date) => {
-         date = moment(date, "MM-DD-YYYY").toDate();
-        const action = { type: 'SET_DATE', data: date };
+      SET_DATE: (date , dateInput) => {
+        console.log(date);
+         date =new Date(date);
+         date = date.toISOString().replace(/T.*/,'').split('-').join('-');
+         console.log(date);
+        const action = { type: 'SET_DATE', data: date , dateInput : dateInput };
         dispatch(action);
     }
 

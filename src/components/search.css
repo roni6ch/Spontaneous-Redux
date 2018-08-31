@@ -1,7 +1,6 @@
 h1{font-size:70px;}
 
 .searchBox{
-    width: 500px;
 padding: 1%;
 position: relative;
 margin: 3% auto;
@@ -12,6 +11,7 @@ margin-top: 3%;
 .logo {
     margin: 0 auto;
     display: block;
+    width: 300px;
 }
 .input-field label.autocomplete-input{color:#000;}
 #currency{position: relative;
@@ -42,3 +42,5 @@ margin-top: 3%;
       :-moz-placeholder { /* Firefox 18- */
         color: #000;
       }
+      
+.select-wrapper input.select-dropdown{    border-bottom: 1px solid #9e9e9e;}

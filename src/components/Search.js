@@ -1,19 +1,16 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
 import './search.css';
 
 import AutoCompleteTeminals from './AutoCompleteTeminals';
 import DatePicker1 from './DatePicker';
+import Currency from './Currency';
+import Budget from './Budget';
+import ResultsNumber from './ResultsNumber';
+
+
 import logo from '../content/images/logo.png';
-import M from 'materialize-css';
-import { Redirect } from 'react-router';
-
-
-
-
-
-
-
+import {Redirect} from 'react-router';
 
 class Search extends Component {
     constructor(props) {
@@ -22,57 +19,41 @@ class Search extends Component {
             redirectToReferrer: false
         }
 
-    }
-    componentDidMount() {
-        M.FormSelect.init(document.querySelectorAll('select'));
-    }
-    currencyChange(e) {
-        this.props.SET_CURRENCY(e.target.value);
-    }
-    budgetChange(e) {
-        this.props.SET_BUDGET(e.target.value);
+        this.props.initState();
+
     }
     render() {
         if (this.props.submit === true) {
-            return <Redirect to="/results" />
+            return <Redirect to="/results"/>
         }
         return (
 
             <div className="Search">
-                <form onSubmit={(e) => { this.props.SUBMIT(e) }}>
-                    <div className="searchBox container ">
-                        <img src={logo} alt="logo" className="logo" />
+                <form
+                    onSubmit={(e) => {
+                    this.props.SUBMIT(e)
+                }}>
+                    <div className="searchBox container orange lighten-3 ">
+                        <img src={logo} alt="logo" className="logo"/>
                         <div className="row">
-                            <div className="input-field col s1">
-                                <i className="material-icons">place</i>
-                            </div>
-                            <div className="input-field col s11">
-                                <AutoCompleteTeminals className="autocomplete" id="autocomplete-input" />
-                            </div>
-                        </div>
 
+                            <AutoCompleteTeminals className="autocomplete" place="Origin"/>
+
+                             <AutoCompleteTeminals className="autocomplete"  place="Destination"/>
+                        </div>
                         <div className="row">
-                            <div className="input-field col s1">
-                                <select name="currency" onChange={(e) => this.currencyChange(e)}>
-                                    <option value="ils" defaultValue>₪</option>
-                                    <option value="dollar">$</option>
-                                    <option value="euro">€</option>
-                                </select>
+                            <DatePicker1 dateInput="date"/>
+                            <DatePicker1 dateInput="returnDate"/>
                             </div>
-
-                            <div className="input-field col s4">
-
-                                <input id="icon_telephone" type="number" name="budget" className="validate" onChange={(e) => this.budgetChange(e)} />
-                                <label htmlFor="icon_telephone">Budget</label>
-
-                            </div>
-                            <div className="input-field col s6">
-
-                                <DatePicker1 />
-
-                            </div>
+                            <div className="row">
+                            <Currency/>
+                            <Budget/>
+                            <ResultsNumber />
                         </div>
-                        <button type="submit">Submit</button>
+                        
+                        <button className="btn waves-effect waves-light blue lighten-1" type="submit" name="action">Submit
+    <i className="material-icons right">send</i>
+  </button>
 
                     </div>
                 </form>
@@ -81,37 +62,29 @@ class Search extends Component {
     }
 }
 
-
-
 function mapStateToProps(state) {
-    return {
-        currency: state.currency,
-        budget: state.budget,
-        date: state.date,
-        terminal: state.terminal,
-        submit:state.submit
-    };
+    return {currency: state.currency, budget: state.budget, date: state.date, terminal: state.terminal, submit: state.submit};
 }
 function mapDispatchToProps(dispatch) {
     return {
+        initState: () => {
+            //change rout to results with new parameters
+            const action = {
+                type: 'INIT',
+                data: false
+            };
+            dispatch(action);
+        },
         SUBMIT: (event) => {
-         //change rout to results with new parameters
-         const action = { type: 'SUBMIT', data: true };
-            dispatch(action);
-         
+            //change route to results with new parameters
 
-        },
-        SET_CURRENCY: (currency) => {
-            const action = { type: 'SET_CURRENCY', data: currency };
+            event.preventDefault();
+            const action = {
+                type: 'SUBMIT',
+                data: true
+            };
             dispatch(action);
-        },
-        SET_BUDGET: (budget) => {
-            const action = { type: 'SET_BUDGET', data: budget };
-            dispatch(action);
-        },
-
-
+        }
     }
 }
-
 export default connect(mapStateToProps, mapDispatchToProps)(Search);
