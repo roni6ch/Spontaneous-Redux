@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
-import moment from 'moment';
 
 import 'react-datepicker/dist/react-datepicker.css';
 
@@ -50,8 +49,8 @@ export default connect(mapStateToProps, mapDispatchToProps)(DatePicker1);
 
 function mapStateToProps(state) {
   return {
-    date: state.date,
-    return_date : state.return_date
+    date: state.reducer.date,
+    return_date : state.reducer.return_date
   };
 }
 function mapDispatchToProps(dispatch) {

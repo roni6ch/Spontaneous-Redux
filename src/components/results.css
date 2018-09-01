@@ -33,7 +33,7 @@
   }
   .collapsible:hover{opacity:0.9}
   .resultsFilter{
-    max-width: 640px;  padding: 1%;
+    max-width: 400px;  padding: 1%;
     margin-top: 10px;
     background: #ccc;
     border-radius: 10px;
@@ -48,6 +48,34 @@
 }
 .collapsible-body span {
   margin: 0px 5px;
+}
+
+
+
+input[type=text]:not(.browser-default) , input[type=number]:not(.browser-default){
+  height: 2rem;
+}
+.budget label{
+  font-size:12px;
+}
+.budget.input-field>label:not(.label-icon).active{
+  -webkit-transform: translateY(-08px) scale(0.8);
+  -ms-transform: translateY(-08px) scale(0.8);
+  transform: translateY(-8px) scale(0.8);
+}
+
+.otherInfo{
+  font-size: 12px;
+}
+
+.collapsible-header span{
+  margin:0px 3px;
+}
+@media only screen and (max-width: 640px) {
+  .collapsible{
+    margin: 1px 0px !important;
+  }
+  .timeAndstops, .connectionTime{font-size:12px;}
 }
 
 

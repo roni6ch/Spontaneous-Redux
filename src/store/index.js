@@ -1,12 +1,12 @@
-import {createStore} from 'redux';
+import {combineReducers ,createStore} from 'redux';
 
 const initialState = {
     terminals: [],
     terminal: "TLV",
     terminalDest : "LAX",
     currency: "USD",
-    date: "2018-08-31",
-    return_date : "2018-09-30",
+    date: "2018-09-01",
+    return_date : "2018-09-05",
     budget: 2000,
     submit: false,
     error : "",
@@ -30,12 +30,11 @@ const reducer = (state = initialState, action) => {
         case 'GET_TERMINALS':
             return Object.assign({}, state, {terminals: action.data});
         case 'SET_TERMINAL':
-            return Object.assign({}, state, {terminal: action.data});
+            return Object.assign({}, state, {terminal: action.data.split("-")[0].trim()});
             case  'SET_TERMINAL_DEST':
-             return Object.assign({}, state, {terminalDest: action.data});
+             return Object.assign({}, state, {terminalDest: action.data.split("-")[0].trim()});
       case 'SET_RESULTS_NUMBER':
       return Object.assign({}, state, {resultsNumber: action.data});
-      
             case 'SET_CURRENCY':
             return Object.assign({}, state, {currency: action.data});
         case 'SET_BUDGET':
@@ -46,7 +45,7 @@ const reducer = (state = initialState, action) => {
             else 
             return Object.assign({}, state, { return_date: action.data});
         case 'SUBMIT':
-            if (state.budget !== 0 && state.terminal !== "" && state.terminalDest !== "" && state.date !== null) 
+            if (state.budget !== 0 && state.terminal !== "" &&  state.date !== null && state.return_date !== null) 
                 return Object.assign({}, state, {submit: action.data});
             else 
                 return state;
@@ -62,6 +61,21 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-const store = createStore(reducer);
+const initialState2 = {
+    terminals2: [],
+}
+const searchReducer = (state = initialState2, action) => {
+    switch (action.type) {
+        case 'CHECK':
+            return Object.assign({}, state, {submit: action.data});
+        default:
+            return state
+    }
+}
+const reducers = combineReducers({
+    reducer,
+     searchReducer
+})
+const store = createStore(reducers);
 
 export default store;

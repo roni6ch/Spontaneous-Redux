@@ -13,7 +13,9 @@
             render() {
             return (
                 <div className="col s3">
-                <select name="currency" require="true" onChange={(e) => this.currencyChange(e)}>
+                <select name="currency" 
+                 value={this.props.currency}
+                 require="true" onChange={(e) => this.currencyChange(e)}>
                 <option value="USD" defaultValue>$</option>
                 <option value="ILS" >₪</option>
                 <option value="EUR">€</option>
@@ -27,7 +29,7 @@
 
         function mapStateToProps(state) {
             return {
-                currency: state.currency,
+                currency: state.reducer.currency,
             
             };
         }

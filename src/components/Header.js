@@ -14,20 +14,20 @@ class Header extends Component {
             <div>
                 <nav>
                     <div className="nav-wrapper blue  lighten-1">
-                        <a href="/" className="brand-logo" onClick={() => {   this.props.INIT()  }} ><img src={logo}/></a>
+                        <a href="/" className="brand-logo" onClick={() => {   this.props.INIT()  }} ><img alt="logo" src={logo}/></a>
                         <a href="/" data-target="mobile-demo" className="sidenav-trigger">
                             <i className="material-icons">menu</i>
                         </a>
                         <ul className="right hide-on-med-and-down">
                             <li>
-                                <a href="http://Roni.pe.hu" target="_blank">About</a>
+                                <a href="http://Roni.pe.hu" target="_blank" rel="noopener noreferrer">About</a>
                             </li>
                         </ul>
                     </div>
                 </nav>
 
                 <ul className="sidenav" id="mobile-demo">
-                    <li>  <a href="http://Roni.pe.hu" target="_blank">About</a></li>
+                    <li>  <a href="http://Roni.pe.hu" target="_blank" rel="noopener noreferrer">About</a></li>
                 </ul>
             </div>
         );

@@ -4,7 +4,7 @@ import axios from 'axios';
 import M from 'materialize-css';
 import './results.css';
 import DatePicker1 from './DatePicker';
-import AutoCompleteTeminals from './AutoCompleteTeminals';
+import AutoComplete from './AutoComplete';
 import Currency from './Currency';
 import Budget from './Budget';
 import ResultsNumber from './ResultsNumber';
@@ -22,14 +22,12 @@ function calcFlightTime(returnFrom, depart, arrive) {
             .toUTCString()
             .split(" ")[4];
 
-        return parseInt(diff.split(":")[1]) + "h:" + diff.split(":")[2] + "m";
+        return parseInt(diff.split(":")[1],10) + "h:" + diff.split(":")[2] + "m";
     }
 }
 
 class Results extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+ 
     componentDidMount() {
 
         this
@@ -52,17 +50,21 @@ class Results extends React.Component {
         return <div className="resultsWrapper">
 
             <div className="resultsFilter row blue  lighten-1">
-                <AutoCompleteTeminals className="autocomplete" place="Origin"/>
-                <AutoCompleteTeminals className="autocomplete" place="Destination"/>
 
+
+
+
+<AutoComplete  place="Origin"/>
+<AutoComplete  place="Destination"/>
                 <DatePicker1 dateInput="date"/>
                 <DatePicker1 dateInput="returnDate"/>
+                <div>
                 <Currency/>
                 <Budget/>
                 <ResultsNumber/>
-
+                </div>
                 <button
-                    className="btn waves-effect waves-light blue lighten-1"
+                    className="btn waves-effect  waves-light blue-grey lighten-5 lighten-1"
                     type="submit"
                     onClick={() => this.filter()}
                     name="action">Filter!
@@ -73,9 +75,7 @@ class Results extends React.Component {
 
             <div className="row">
 
-                {this.props.results.length == 0 && this.props.error === ""
-                    ? <div className="lds-hourglass" ref="spinner"></div>
-                    : ''}
+                {this.props.results.length === 0 && this.props.error === ""  ? <div className="lds-hourglass" ref="spinner"></div>  : ''}
 
                 {this.props.error
                     ? <div className="error red">
@@ -213,7 +213,7 @@ class Results extends React.Component {
                                                     </p>
 
                                                 </div>
-                                                <div className="col s4 left-align">
+                                                <div className="col s4 left-align otherInfo">
                                                     <p>
                                                         Seats Remaining:
                                                         <b>{r.outbound.flights[0].booking_info.seats_remaining}</b>
@@ -253,16 +253,16 @@ export default connect(mapStateToProps, mapDispatchToProps)(Results);
 
 function mapStateToProps(state) {
     return {
-        results: state.results,
-        timezone: state.timezone,
-        currency: state.currency,
-        terminal: state.terminal,
-        date: state.date,
-        return_date: state.return_date,
-        error: state.error,
-        budget: state.budget,
-        terminalDest: state.terminalDest,
-        resultsNumber: state.resultsNumber
+        results: state.reducer.results,
+        timezone: state.reducer.timezone,
+        currency: state.reducer.currency,
+        terminal: state.reducer.terminal,
+        date: state.reducer.date,
+        return_date: state.reducer.return_date,
+        error: state.reducer.error,
+        budget: state.reducer.budget,
+        terminalDest: state.reducer.terminalDest,
+        resultsNumber: state.reducer.resultsNumber
     };
 }
 function mapDispatchToProps(dispatch) {
@@ -294,11 +294,11 @@ function mapDispatchToProps(dispatch) {
                     console.log(error);
 
                     var err = error.response.data
-                        ? error.response.data
+                        ? error.response.data.message
                         : error.message;
                     const action = {
                         type: 'RESULTS_ERROR',
-                        data: error.response.data.message
+                        data: err
                     };
                     dispatch(action);
 
@@ -310,7 +310,6 @@ function mapDispatchToProps(dispatch) {
                 .get('./data/timeZoneByAirports.json', {})
                 .then(function (response) {
                     var timezone = {};
-                    console.log(response);
                     response
                         .data
                         .forEach(function (timeZone) {
@@ -322,7 +321,6 @@ function mapDispatchToProps(dispatch) {
                             }
                         })
 
-                    console.log(timezone);
 
                     const action = {
                         type: 'TIMEZONE',

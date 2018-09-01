@@ -2,11 +2,12 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import './search.css';
 
-import AutoCompleteTeminals from './AutoCompleteTeminals';
+import AutoComplete from './AutoComplete';
 import DatePicker1 from './DatePicker';
 import Currency from './Currency';
 import Budget from './Budget';
 import ResultsNumber from './ResultsNumber';
+
 
 import logo from '../content/images/logo.png';
 import {Redirect} from 'react-router';
@@ -40,9 +41,8 @@ class Search extends Component {
                         <img src={logo} alt="logo" className="logo"/>
                         <div className="row">
 
-                            <AutoCompleteTeminals className="autocomplete" place="Origin"/>
-
-                            <AutoCompleteTeminals className="autocomplete" place="Destination"/>
+<AutoComplete  place="Origin"/>
+<AutoComplete  place="Destination"/>
                         </div>
                         <div className="row">
                             <DatePicker1 dateInput="date"/>
@@ -69,7 +69,8 @@ class Search extends Component {
 }
 
 function mapStateToProps(state) {
-    return {currency: state.currency, budget: state.budget, date: state.date, terminal: state.terminal, submit: state.submit};
+    console.log(state);
+    return {currency: state.reducer.currency, budget: state.reducer.budget, date: state.reducer.date, terminal: state.reducer.terminal, submit: state.reducer.submit};
 }
 function mapDispatchToProps(dispatch) {
     return {

@@ -103,9 +103,9 @@
 
   function mapStateToProps(state) {
     return {
-        terminals: state.terminals,
-        terminal: state.terminal,
-        terminalDest : state.terminalDest
+        terminals: state.reducer.terminals,
+        terminal: state.reducer.terminal,
+        terminalDest : state.reducer.terminalDest
     };
   }
   function mapDispatchToProps(dispatch) {

@@ -10,13 +10,12 @@ class Budget extends Component {
     }
     render() {
         return (
-            <div className="col s5 input-field">
-                <label htmlFor="budget">Budget</label>
-
+            <div className="col s4 input-field budget">
                 <input
                     require="true"
                     id="budget"
                     type="number"
+                    placeholder="Budget?"
                     value={this.props.budget}
                     name="budget"
                     className="validate"
@@ -30,7 +29,7 @@ class Budget extends Component {
 export default connect(mapStateToProps, mapDispatchToProps)(Budget);
 
 function mapStateToProps(state) {
-    return {budget: state.budget};
+    return {budget: state.reducer.budget};
 }
 function mapDispatchToProps(dispatch) {
     return {

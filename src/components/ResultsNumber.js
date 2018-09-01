@@ -12,13 +12,14 @@ class ResultsNumber extends Component {
     }
     render() {
         return (
-            <div className="col s4">
-                 <select name="resultNumber" require="true" onChange={(e) => this.resultsNumberChange(e)}>
-                <option defaultValue>Results</option>
-                <option value="10" defaultValue>10</option>
-                <option value="50" >50</option>
-                <option value="100">100</option>
-                <option value="200">200</option>
+            <div className="col s5">
+                 <select name="resultNumber" require="true"
+                   value={this.props.resultsNumber}
+                    onChange={(e) => this.resultsNumberChange(e)}>
+                <option value="10" defaultValue>10 Results</option>
+                <option value="50" >50 Results</option>
+                <option value="100">100 Results</option>
+                <option value="200">200 Results</option>
                 </select>
             </div>
         );
@@ -27,7 +28,7 @@ class ResultsNumber extends Component {
 
 function mapStateToProps(state) {
     return {
-        resultsNumber : state.resultsNumber
+        resultsNumber : state.reducer.resultsNumber
     };
 }
 function mapDispatchToProps(dispatch) {

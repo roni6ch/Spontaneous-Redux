@@ -20,6 +20,8 @@ body {
     padding: 20px;
     color: white;
 }
+input{color:#fff;
+  border-bottom: 1px solid #fff !important;}
 
 .App-title {
     font-size: 1.5em;
@@ -36,6 +38,7 @@ body {
 .brand-logo img {
     width: 75px;
 }
+.dropdown-content li>a, .dropdown-content li>span{text-align: center}
 @keyframes App-logo-spin {
     from {
         transform: rotate(0deg);
@@ -49,8 +52,8 @@ body {
     position: relative;
 }
 #react-autowhatever-1 {
-    background: #2b72aa;
-    color: #fff;
+    background: #fff;
+    color: #2b72aa;
     cursor: pointer;
     text-align: center;
     margin: 0 auto;
@@ -58,8 +61,10 @@ body {
     right: 0;
     z-index: 99;
 }
+.autocomplete > div > div{z-index: 9999;cursor: pointer;}
+ul:not(.browser-default){    margin: 0px;}
 .react-autosuggest__suggestions-list li {
-    border-bottom: 1px solid #fff;
+    border-bottom: 1px solid #ccc;
 }
 .react-autosuggest__suggestions-list li:hover {
     opacity: 0.8;
