@@ -32,13 +32,18 @@ class DatePicker1 extends React.Component {
           return date.toDate().getFullYear() +  "/" + (date.getMonth() + 1) +   "/" +  date.getDate()
         }
         render() {
-          return <div className="col s6">
+          return <div>
+          <div className=" col s1">
+          <i className="material-icons">date_range</i>
+      </div>
+          <div className=" col s5">
+          
           <DatePicker name="date" autoComplete="off" require="true"
           placeholderText="Date" 
               selected={this.props.dateInput === "date" ? this.state.startDate : this.state.endDate} 
               value={this.props.dateInput === "date" ? this.props.date : this.props.return_date}
               onChange={this.handleChange}
-          /></div>;
+          /></div></div>;
         }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DatePicker1);

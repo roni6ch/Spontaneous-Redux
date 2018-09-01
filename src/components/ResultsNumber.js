@@ -12,7 +12,7 @@ class ResultsNumber extends Component {
     }
     render() {
         return (
-            <div className="col s3">
+            <div className="col s4">
                  <select name="resultNumber" require="true" onChange={(e) => this.resultsNumberChange(e)}>
                 <option defaultValue>Results</option>
                 <option value="10" defaultValue>10</option>

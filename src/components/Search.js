@@ -8,7 +8,6 @@ import Currency from './Currency';
 import Budget from './Budget';
 import ResultsNumber from './ResultsNumber';
 
-
 import logo from '../content/images/logo.png';
 import {Redirect} from 'react-router';
 
@@ -19,7 +18,9 @@ class Search extends Component {
             redirectToReferrer: false
         }
 
-        this.props.initState();
+        this
+            .props
+            .initState();
 
     }
     render() {
@@ -31,29 +32,34 @@ class Search extends Component {
             <div className="Search">
                 <form
                     onSubmit={(e) => {
-                    this.props.SUBMIT(e)
+                    this
+                        .props
+                        .SUBMIT(e)
                 }}>
-                    <div className="searchBox container orange lighten-3 ">
+                    <div className="searchBox container blue  lighten-1 ">
                         <img src={logo} alt="logo" className="logo"/>
                         <div className="row">
 
                             <AutoCompleteTeminals className="autocomplete" place="Origin"/>
 
-                             <AutoCompleteTeminals className="autocomplete"  place="Destination"/>
+                            <AutoCompleteTeminals className="autocomplete" place="Destination"/>
                         </div>
                         <div className="row">
                             <DatePicker1 dateInput="date"/>
                             <DatePicker1 dateInput="returnDate"/>
-                            </div>
-                            <div className="row">
+                        </div>
+                        <div className="row">
                             <Currency/>
                             <Budget/>
-                            <ResultsNumber />
+                            <ResultsNumber/>
                         </div>
-                        
-                        <button className="btn waves-effect waves-light blue lighten-1" type="submit" name="action">Submit
-    <i className="material-icons right">send</i>
-  </button>
+
+                        <button
+                            className="btn waves-effect waves-light blue-grey lighten-5 lighten-1"
+                            type="submit"
+                            name="action">Submit
+                            <i className="material-icons right">send</i>
+                        </button>
 
                     </div>
                 </form>

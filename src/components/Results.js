@@ -51,7 +51,7 @@ class Results extends React.Component {
     render() {
         return <div className="resultsWrapper">
 
-            <div className="resultsFilter row orange lighten-3">
+            <div className="resultsFilter row blue  lighten-1">
                 <AutoCompleteTeminals className="autocomplete" place="Origin"/>
                 <AutoCompleteTeminals className="autocomplete" place="Destination"/>
 

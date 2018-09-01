@@ -46,7 +46,7 @@ const reducer = (state = initialState, action) => {
             else 
             return Object.assign({}, state, { return_date: action.data});
         case 'SUBMIT':
-            if (state.budget !== 0 && state.terminal !== "" && state.date !== null) 
+            if (state.budget !== 0 && state.terminal !== "" && state.terminalDest !== "" && state.date !== null) 
                 return Object.assign({}, state, {submit: action.data});
             else 
                 return state;

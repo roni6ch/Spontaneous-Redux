@@ -13,7 +13,7 @@ class Header extends Component {
         return (
             <div>
                 <nav>
-                    <div className="nav-wrapper orange lighten-3">
+                    <div className="nav-wrapper blue  lighten-1">
                         <a href="/" className="brand-logo" onClick={() => {   this.props.INIT()  }} ><img src={logo}/></a>
                         <a href="/" data-target="mobile-demo" className="sidenav-trigger">
                             <i className="material-icons">menu</i>

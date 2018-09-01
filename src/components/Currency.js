@@ -12,7 +12,7 @@
             }
             render() {
             return (
-                <div className="col s1">
+                <div className="col s3">
                 <select name="currency" require="true" onChange={(e) => this.currencyChange(e)}>
                 <option value="USD" defaultValue>$</option>
                 <option value="ILS" >₪</option>
