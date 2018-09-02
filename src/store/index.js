@@ -3,13 +3,14 @@ import {combineReducers ,createStore} from 'redux';
 const initialState = {
     terminals: [],
     terminal: "TLV",
-    terminalDest : "LAX",
+    terminalDest : "ATH",
     currency: "USD",
-    date: "2018-09-01",
-    return_date : "2018-09-05",
+    date: makeDate(),
+    return_date : makeDateReturn(),
     budget: 2000,
     submit: false,
     error : "",
+    direct:false,
     results: [],
     resultsNumber : 10,
     timezone: {
@@ -17,7 +18,16 @@ const initialState = {
         'destination_timezone': 0
     }
 }
-
+function makeDate(){
+   var date =new Date();
+    date = date.toISOString().replace(/T.*/,'').split('-').join('-');
+    return date;
+}
+function makeDateReturn(){
+    var date =new Date(new Date().getTime() + 24 * 60 * 60 * 2000);
+    date = date.toISOString().replace(/T.*/,'').split('-').join('-');
+   return date;
+}
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'INIT':
@@ -39,7 +49,10 @@ const reducer = (state = initialState, action) => {
             return Object.assign({}, state, {currency: action.data});
         case 'SET_BUDGET':
             return Object.assign({}, state, {budget: action.data});
-        case 'SET_DATE':
+            case 'SET_DIRECT':
+            return Object.assign({}, state, {direct: action.data});
+      
+            case 'SET_DATE':
             if (action.dateInput === 'date')
             return Object.assign({}, state, { date: action.data});
             else 

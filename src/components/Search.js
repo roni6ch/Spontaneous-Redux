@@ -7,6 +7,7 @@ import DatePicker1 from './DatePicker';
 import Currency from './Currency';
 import Budget from './Budget';
 import ResultsNumber from './ResultsNumber';
+import Direct from './Direct';
 
 
 import logo from '../content/images/logo.png';
@@ -54,12 +55,21 @@ class Search extends Component {
                             <ResultsNumber/>
                         </div>
 
-                        <button
+
+   <div className="row">
+                 <div className="col s4">
+                 <Direct />
+                </div> <div className="col s8">
+              
+                <button
                             className="btn waves-effect waves-light blue-grey lighten-5 lighten-1"
                             type="submit"
                             name="action">Submit
                             <i className="material-icons right">send</i>
-                        </button>
+                        </button></div> </div>
+
+
+
 
                     </div>
                 </form>
@@ -70,7 +80,13 @@ class Search extends Component {
 
 function mapStateToProps(state) {
     console.log(state);
-    return {currency: state.reducer.currency, budget: state.reducer.budget, date: state.reducer.date, terminal: state.reducer.terminal, submit: state.reducer.submit};
+    return {currency: state.reducer.currency,
+         budget: state.reducer.budget,
+          date: state.reducer.date,
+           terminal: state.reducer.terminal,
+           terminalDest: state.reducer.terminalDest,
+           direct:state.reducer.direct,
+            submit: state.reducer.submit};
 }
 function mapDispatchToProps(dispatch) {
     return {

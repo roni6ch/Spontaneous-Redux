@@ -7,6 +7,7 @@ import DatePicker1 from './DatePicker';
 import AutoComplete from './AutoComplete';
 import Currency from './Currency';
 import Budget from './Budget';
+import Direct from './Direct';
 import ResultsNumber from './ResultsNumber';
 
 function splitHour(date) {
@@ -14,6 +15,12 @@ function splitHour(date) {
         var array = date.split('T');
         return array[1];
     }
+}
+function splitDate(date) {
+  if (date !== null && date !== undefined) {
+      var array = date.split('T');
+      return array[0];
+  }
 }
 function calcFlightTime(returnFrom, depart, arrive) {
     if (depart !== null && depart !== undefined && arrive !== null && arrive !== undefined) {
@@ -35,7 +42,7 @@ class Results extends React.Component {
             .TIMEZONE();
         this
             .props
-            .SET_RESULTS(this.props.currency, this.props.terminal, this.props.budget, this.props.date, this.props.terminalDest, this.props.resultsNumber, this.props.return_date);
+            .SET_RESULTS(this.props.currency, this.props.terminal, this.props.budget, this.props.date, this.props.terminalDest, this.props.resultsNumber, this.props.return_date,this.props.direct);
 
    
           }
@@ -44,7 +51,7 @@ class Results extends React.Component {
 
         this
             .props
-            .SET_RESULTS(this.props.currency, this.props.terminal, this.props.budget, this.props.date, this.props.terminalDest, this.props.resultsNumber, this.props.return_date)
+            .SET_RESULTS(this.props.currency, this.props.terminal, this.props.budget, this.props.date, this.props.terminalDest, this.props.resultsNumber, this.props.return_date,this.props.direct)
     }
     render() {
         return <div className="resultsWrapper">
@@ -63,13 +70,18 @@ class Results extends React.Component {
                 <Budget/>
                 <ResultsNumber/>
                 </div>
+
+                 <div className="row">
+                 <div className="col s4">
+               <Direct />
+                </div> <div className="col s8">
                 <button
                     className="btn waves-effect  waves-light blue-grey lighten-5 lighten-1"
                     type="submit"
                     onClick={() => this.filter()}
                     name="action">Filter!
                     <i className="material-icons right">send</i>
-                </button>
+                </button></div> </div>
 
             </div>
 
@@ -114,7 +126,7 @@ class Results extends React.Component {
                                                     src={`http://pics.avs.io/100/30/${r.outbound.flights[0].operating_airline}.png`}
                                                     alt='logo'/>
                                             </p>
-                                            <div className="col s4">
+                                            <div className="col s4 relative">
                                                 <span>
                                                     <b>{r.outbound.flights[0].origin.airport}</b>
                                                 </span>
@@ -124,19 +136,18 @@ class Results extends React.Component {
                                                     <b>{r.outbound.flights[r.outbound.flights.length - 1].destination.airport}</b>
                                                 </span>
                                                 <span>{splitHour(r.outbound.flights[r.outbound.flights.length - 1].arrives_at)}</span>
-                                                <div className="timeAndstops">
+                                                
+                                                
+                                                {r.outbound.flights.length - 1 === 1  ?  <div className="timeAndstops">
                                                     <i className="material-icons">alarm</i>
+                                                       <span>  {calcFlightTime('local', r.outbound.flights[0].arrives_at, r.outbound.flights[r.outbound.flights.length - 1].departs_at)}</span>
+                                                       <span>{r.outbound.flights.length - 1} Stops</span>
 
-                                                    <span>
-                                                        {calcFlightTime('local', r.outbound.flights[0].arrives_at, r.outbound.flights[r.outbound.flights.length - 1].departs_at)}</span>
-                                                    <p>{r.outbound.flights.length - 1}
-                                                        Stops</p>
-
-                                                </div>
+                                                </div>: ''}
                                             </div>
 
                                             {/*inbound*/}
-                                            <div className="col s4">
+                                            <div className="col s4 relative">
                                                 <span >
                                                     <b>{r.inbound.flights[0].origin.airport}</b>
                                                 </span>
@@ -146,17 +157,17 @@ class Results extends React.Component {
                                                     <b>{r.inbound.flights[r.inbound.flights.length - 1].destination.airport}</b>
                                                 </span>
                                                 <span>{splitHour(r.inbound.flights[r.inbound.flights.length - 1].arrives_at)}</span>
-                                                <div className="timeAndstops">
+                                                {r.inbound.flights.length - 1 === 1  ?  <div className="timeAndstops">
 
                                                     <i className="material-icons">alarm</i>
                                                     <span>
                                                         {calcFlightTime('destination', r.inbound.flights[0].arrives_at, r.inbound.flights[r.inbound.flights.length - 1].departs_at)}</span>
-                                                    <p>
+                                                   
                                                         <span>{r.inbound.flights.length - 1}
                                                             Stops</span>
-                                                    </p>
+                                                   
 
-                                                </div>
+                                                </div> : '' }
                                             </div>
 
                                         </div>
@@ -170,22 +181,32 @@ class Results extends React.Component {
                                                         .flights
                                                         .map(function (flight, i) {
                                                             return (
-                                                                <div key={i}>
-                                                                    <span >
-                                                                        {flight.origin.airport}</span>
-                                                                    <span>{splitHour(flight.departs_at)}</span>
-                                                                    <i className="material-icons fa-rotate-90">airplanemode_active</i>
-                                                                    <span >
-                                                                        {flight.destination.airport}</span>
-                                                                    <span>{splitHour(flight.arrives_at)}</span>
-                                                                </div>
+                                                                <div key={i}  className="info">
+
+                                                                <div  className="row">
+                                                                    <span className="col s4">   <b>{flight.origin.airport}</b></span>
+                                                                    <i className="material-icons fa-rotate-90 col s2">airplanemode_active</i>
+                                                                    <span className="col s4">  <b> {flight.destination.airport}</b></span>
+                                                                    </div>
+
+                                                                    <div  className="row">
+                                                                     <span className="hideMobile col s3 m3">Depart:</span> 
+                                                                     <span className="dateInfo col s6 m5">{splitDate(flight.departs_at)}</span>
+                                                                    <span className="col s5 m4"> {splitHour(flight.departs_at)}</span>
+                                                                    </div>
+                                                                    <div  className="row">
+                                                                    <span className="hideMobile col s3  m3">Arrive:</span> 
+                                                                    <span className="dateInfo col s6  m5">{splitDate(flight.arrives_at)}</span>
+                                                                    <span className="col s5 m4">{splitHour(flight.arrives_at)}</span>
+                                                                    </div> 
+                                                                    </div>
                                                             );
                                                         })}
-
+   {r.outbound.flights.length - 1 === 1  ? 
                                                     <p className="connectionTime">
-                                                        {calcFlightTime('local', r.outbound.flights[0].arrives_at, r.outbound.flights[r.outbound.flights.length - 1].departs_at)}
-                                                        Connection
-                                                    </p>
+                                                    Connection Time:  {calcFlightTime('local', r.outbound.flights[0].arrives_at, r.outbound.flights[r.outbound.flights.length - 1].departs_at)}
+                                                       
+                                                    </p> : '' }
 
                                                     <hr></hr>
                                                     {/*inbound info*/}
@@ -196,21 +217,33 @@ class Results extends React.Component {
                                                         .map(function (flight, i) {
                                                             return (
                                                                 <div key={i}>
-                                                                    <span >
-                                                                        {flight.origin.airport}</span>
-                                                                    <span>{splitHour(flight.departs_at)}</span>
-                                                                    <i className="material-icons fa-rotate-270">airplanemode_active</i>
-                                                                    <span >
-                                                                        {flight.destination.airport}</span>
-                                                                    <span>{splitHour(flight.arrives_at)}</span>
-                                                                </div>
+                                                                  <div  className="row">
+                                                                    <span className="col s4"> <b> {flight.origin.airport}</b></span>
+                                                                    <i className="material-icons fa-rotate-270 col s2">airplanemode_active</i>
+                                                                    <span className="col s4">   <b>{flight.destination.airport}</b></span>
+                                                                    </div>
+
+
+
+                                                                    <div  className="row">
+                                                                     <span className="hideMobile col s3 m3">Depart:</span> 
+                                                                     <span className="dateInfo col s6 m5">{splitDate(flight.departs_at)}</span>
+                                                                    <span className="col s5 m4"> {splitHour(flight.departs_at)}</span>
+                                                                    </div>
+                                                                    <div  className="row">
+                                                                    <span className="hideMobile col s3  m3">Arrive:</span> 
+                                                                    <span className="dateInfo col s6  m5">{splitDate(flight.arrives_at)}</span>
+                                                                    <span className="col s5 m4">{splitHour(flight.arrives_at)}</span>
+                                                                    </div> 
+
+                                                                </div> 
                                                             );
                                                         })}
-
+                                                        {r.inbound.flights.length - 1 === 1  ? 
                                                     <p className="connectionTime">
-                                                        {calcFlightTime('local', r.inbound.flights[0].arrives_at, r.inbound.flights[r.inbound.flights.length - 1].departs_at)}
-                                                        Connection
-                                                    </p>
+                                                    Connection Time: {calcFlightTime('local', r.inbound.flights[0].arrives_at, r.inbound.flights[r.inbound.flights.length - 1].departs_at)}
+                                                   
+                                                    </p> :'' }
 
                                                 </div>
                                                 <div className="col s4 left-align otherInfo">
@@ -234,6 +267,7 @@ class Results extends React.Component {
                                                         Destination:
                                                         <b>{r.outbound.flights[0].destination.airport}</b>
                                                     </p>
+                                                    Refundable:   <b>{result.fare.restrictions.refundable ? 'Yes' : 'No'}</b>
                                                 </div>
 
                                             </div>
@@ -261,13 +295,14 @@ function mapStateToProps(state) {
         return_date: state.reducer.return_date,
         error: state.reducer.error,
         budget: state.reducer.budget,
+        direct: state.reducer.direct,
         terminalDest: state.reducer.terminalDest,
         resultsNumber: state.reducer.resultsNumber
     };
 }
 function mapDispatchToProps(dispatch) {
     return {
-        SET_RESULTS: (currency, terminal, budget, date, terminalDest, resultsNumber, return_date) => {
+        SET_RESULTS: (currency, terminal, budget, date, terminalDest, resultsNumber, return_date,direct) => {
 
             const action = {
                 type: 'INIT_RESULTS'
@@ -275,9 +310,8 @@ function mapDispatchToProps(dispatch) {
             dispatch(action);
 
             axios
-           //  .get('./data/flights2.json', {}) 
-             //max_price works only with currency=USD!
-                .get(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=ikb2WCbOOrKkFf5biRa1GmuoGObAz9L7&currency=${currency}&max_price=${budget}&origin=${terminal}&destination=${terminalDest}&departure_date=${date}&return_date=${return_date}&number_of_results=${resultsNumber}`, {})
+             //.get('./data/flights2.json', {}) 
+                .get(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=ikb2WCbOOrKkFf5biRa1GmuoGObAz9L7&currency=${currency}&max_price=${budget}&origin=${terminal}&destination=${terminalDest}&departure_date=${date}&return_date=${return_date}&number_of_results=${resultsNumber}&direct=${direct}`, {})
                 .then(function (response) {
                     console.log(response.data.results);
                     const action = {
