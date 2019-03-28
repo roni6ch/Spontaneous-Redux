@@ -119,7 +119,7 @@ class Results extends React.Component {
                                     </li>
 
                                     <li>
-                                        <div className="collapsible-header">
+                                        <div className="collapsible-header infoBody">
                                             {/*outbound */}
                                             <p className="col s3">
                                                 <img

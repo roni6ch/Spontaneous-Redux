@@ -73,6 +73,10 @@ input[type=text]:not(.browser-default) , input[type=number]:not(.browser-default
 .collapsible-header span{
   margin:0px 3px;
 }
+.infoBody{
+  display: block;
+  min-height: 130px;
+}
 .timeAndstops{position: absolute; right:0;}
 @media only screen and (max-width: 640px) {
   .collapsible{

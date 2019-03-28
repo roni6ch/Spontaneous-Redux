@@ -1,34 +1,57 @@
-import React, {Component} from 'react';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import M from 'materialize-css';
 import logo from '../content/images/logo.png';
+import {
+    MDBNavbar, MDBNavbarBrand, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBNavbarToggler, MDBCollapse, MDBDropdown,
+    MDBDropdownToggle, MDBDropdownMenu, MDBDropdownItem, MDBIcon
+} from "mdbreact";
+
 
 class Header extends Component {
 
+    constructor() {
+        super();
+        this.state = {
+            collapseID: ""
+        };
+    }
     componentDidMount() {
         M.Sidenav.init(document.querySelectorAll('.sidenav'));
     }
+    toggleCollapse = collapseID => () =>
+        this.setState(prevState => ({
+            collapseID: prevState.collapseID !== collapseID ? collapseID : ""
+        }));
 
     render() {
         return (
-            <div>
-                <nav>
-                    <div className="nav-wrapper blue  lighten-1">
-                        <a href="/" className="brand-logo" onClick={() => {   this.props.INIT()  }} ><img alt="logo" src={logo}/></a>
-                        <a href="/" data-target="mobile-demo" className="sidenav-trigger">
-                            <i className="material-icons">menu</i>
-                        </a>
-                        <ul className="right hide-on-med-and-down">
-                            <li>
-                                <a href="http://Roni.pe.hu" target="_blank" rel="noopener noreferrer">About</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-                <ul className="sidenav" id="mobile-demo">
-                    <li>  <a href="http://Roni.pe.hu" target="_blank" rel="noopener noreferrer">About</a></li>
-                </ul>
+            <div className="navBarHeader">
+                <MDBNavbar style={{ marginTop: "20px" }} dark>
+                    <a href="#" className="brand-logo"><img alt="logo" src={logo} /></a>
+                    <MDBNavbarNav right>
+                        <MDBNavItem>
+                            <MDBNavLink className="waves-effect waves-light" to="http://RoniChabra.com">
+                                <MDBIcon fab icon="google-plus-g" />
+                            </MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink className="waves-effect waves-light" to="https://www.facebook.com/roni6ch">
+                                <MDBIcon fab icon="facebook" />
+                            </MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink className="waves-effect waves-light" to="https://www.linkedin.com/in/roni-chabra-61698558">
+                                <MDBIcon fab icon="linkedin" />
+                            </MDBNavLink>
+                        </MDBNavItem>
+                        <MDBNavItem>
+                            <MDBNavLink className="waves-effect waves-light" to="https://gitlab.com/users/Roni691986/projects">
+                                <MDBIcon fab icon="gitlab" />
+                            </MDBNavLink>
+                        </MDBNavItem>
+                    </MDBNavbarNav>
+                </MDBNavbar>
             </div>
         );
     }
@@ -48,7 +71,7 @@ function mapDispatchToProps(dispatch) {
             };
             dispatch(action);
         },
-       
+
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

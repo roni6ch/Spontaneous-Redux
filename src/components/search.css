@@ -1,5 +1,5 @@
 h1{font-size:70px;}
-
+input{color:#000;}
 .searchBox{
 padding: 1%;
 position: relative;
@@ -12,9 +12,6 @@ margin-top: 3%;
     margin: 0 auto;
     display: block;
     width: 300px;
-}
-.Search .container{
-    width: 400px;
 }
 .input-field label.autocomplete-input{color:#000;}
 #currency{position: relative;
