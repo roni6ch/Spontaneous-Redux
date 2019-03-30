@@ -10,13 +10,12 @@ class Budget extends Component {
     }
     render() {
         return (
-            <div className="col s4 input-field budget">
+            <div className="col s3 input-field budget pl-0">
                 <input
                     require="true"
                     id="budget"
                     type="number"
                     placeholder="Budget?"
-                    value={this.props.budget}
                     name="budget"
                     className="validate"
                     onChange={(e) => this.budgetChange(e)}/>

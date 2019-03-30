@@ -10,13 +10,15 @@ class Direct extends Component {
     render() {
         return (
             <div>
-              <div className="switch">
- <label>
-   <input type="checkbox" checked={this.props.direct} ref={(input) => { this.inputSwitch = input; }}   onChange={(e) => this.directChange(e)}/>
-   <span className="lever"></span>
-   Direct
- </label>
+                
+                <div className="custom-control custom-checkbox pt-2">
+    <input type="checkbox" className="custom-control-input" id="defaultUnchecked"
+     checked={this.props.direct} ref={(input) => { this.inputSwitch = input; }}   onChange={(e) => this.directChange(e)}
+      />
+    <label className="custom-control-label" forname="defaultUnchecked">Direct?</label>
 </div>
+
+
             </div>
         );
     }

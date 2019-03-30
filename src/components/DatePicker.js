@@ -31,18 +31,19 @@ class DatePicker1 extends React.Component {
           return date.toDate().getFullYear() +  "/" + (date.getMonth() + 1) +   "/" +  date.getDate()
         }
         render() {
-          return <div>
-          <div className=" col s1">
+          return (
+          <React.Fragment>
+        <div className="col-1 p-0">
           <i className="material-icons">date_range</i>
-      </div>
-          <div className=" col s5">
+        </div>
+        <div className="col-5 p-0">
           
           <DatePicker name="date" autoComplete="off" require="true"
           placeholderText="Date" 
               selected={this.props.dateInput === "date" ? this.state.startDate : this.state.endDate} 
-              value={this.props.dateInput === "date" ? this.props.date : this.props.return_date}
               onChange={this.handleChange}
-          /></div></div>;
+          /></div>
+          </React.Fragment>)
         }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(DatePicker1);
@@ -60,10 +61,6 @@ function mapDispatchToProps(dispatch) {
           dispatch(action);
       }, 
       SET_DATE: (date , dateInput) => {
-        console.log(date);
-         date =new Date(date);
-         date = date.toISOString().replace(/T.*/,'').split('-').join('-');
-         console.log(date);
         const action = { type: 'SET_DATE', data: date , dateInput : dateInput };
         dispatch(action);
     }

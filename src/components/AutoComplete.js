@@ -1,9 +1,6 @@
 import React, { Component } from 'react';
-import ReactAutocomplete from 'react-autocomplete'
 import { connect } from 'react-redux';
-import axios from 'axios';
-import { MDBInput } from "mdbreact";
-import { Autocomplete } from 'react-materialize';
+import AutoCompleteTeminals from './AutoCompleteTeminals';
 
 class AutoComplete extends Component {
 
@@ -13,15 +10,8 @@ class AutoComplete extends Component {
       value: this.props.terminal,
       valueDest: this.props.terminalDest,
       items: [
-
       ],
-      data: {
-        'Gus Fring': null,
-        'Saul Goodman': null,
-        'Tuco Salamanca': 'https://placehold.it/250x250'
-      }
     }
-
   }
 
   render() {
@@ -31,8 +21,7 @@ class AutoComplete extends Component {
           <i className="material-icons">place</i>
         </div>
         <div className="col-5 autocomplete p-0">
-        <Autocomplete data={this.props.terminals} placeholder="Insert here" icon="textsms" />
-
+        <AutoCompleteTeminals  placeholder={this.props.placeholder} terminals={this.props.terminals} />
          {/* <ReactAutocomplete
             items={terminals}
             shouldItemRender={(item, value) => item.label.toLowerCase().indexOf(value.toLowerCase()) > -1}
@@ -52,13 +41,11 @@ class AutoComplete extends Component {
 }
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(AutoComplete);
-var terminals = [];
 function mapStateToProps(state) {
   return {
-    terminals: state.reducer.terminals,
     terminal: state.reducer.terminal,
-    terminalDest: state.reducer.terminalDest
+    terminalDest: state.reducer.terminalDest,
+    terminals: state.reducer.terminals
   };
 }
 function mapDispatchToProps(dispatch) {
@@ -75,5 +62,6 @@ function mapDispatchToProps(dispatch) {
 
   }
 }
+export default connect(mapStateToProps, mapDispatchToProps)(AutoComplete);
 
 

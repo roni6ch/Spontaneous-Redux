@@ -25,7 +25,7 @@ class App extends Component {
                             </video>
 
                             <div className="wrapper">
-                                <Route path="/" component={Search} />
+                                <Route path="/" exact  component={Search} />
                                 <Route path="/results" component={Results} />
                             </div>
                         </div>

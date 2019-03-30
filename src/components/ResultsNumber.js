@@ -13,7 +13,7 @@ class ResultsNumber extends Component {
     render() {
         return (
             <div className="col s5">
-                 <select name="resultNumber" require="true"
+                 <select name="resultNumber" require="true" className="browser-default custom-select"
                    value={this.props.resultsNumber}
                     onChange={(e) => this.resultsNumberChange(e)}>
                 <option value="10" defaultValue>10 Results</option>
