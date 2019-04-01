@@ -250,10 +250,20 @@ function mapDispatchToProps(dispatch) {
             dispatch(action);
 
             axios
-                .get('./data/flights2.json', {})
-                //.get(`https://api.sandbox.amadeus.com/v1.2/flights/low-fare-search?apikey=ikb2WCbOOrKkFf5biRa1GmuoGObAz9L7&currency=${currency}&max_price=${budget}&origin=${terminal}&destination=${terminalDest}&departure_date=${date}&return_date=${return_date}&number_of_results=${resultsNumber}&direct=${direct}`, {})
-                .then(function (response) {
-                    console.log(response.data.results);
+                 //.get('./data/flights.json', {})
+                 /*
+                 To request an access token you need to send a POST request with the following body parameters to the authorization server:
+
+                    grant_type with the value client_credentials
+                    client_id with your API Key
+                    client_secret with your API Secret
+                    
+                    Both API Key and API Secret were provided to you when you created your application in the portal.
+
+                    */
+               .post('https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=LAX&oneWay=false&nonStop=false&maxPrice=2000&currency=USD', {grant_type:"",client_id:"AAi8wQ9smqr53Ef0m4zIGY5fJ1UR0gux",client_secret:"26iCTESef61KmCdc"})
+               .then(function (response) {
+                    console.log(response);
                     const action = {
                         type: 'SET_RESULTS',
                         data: response.data.results
