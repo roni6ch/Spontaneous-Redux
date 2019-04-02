@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import M from 'materialize-css';
 import './results.css';
+import { AmadeusApi }  from './Amadeus';
+
 
 function splitHour(date) {
     if (date !== null && date !== undefined) {
@@ -28,18 +30,38 @@ function calcFlightTime(returnFrom, depart, arrive) {
 }
 
 class Results extends React.Component {
-
-    componentDidMount() {
+    constructor() {
+        super();
+        this.AmadeusApi = AmadeusApi.bind(this);
+    }
+    async componentDidMount() {
 
         this.props.TIMEZONE(this.props.terminal, this.props.terminalDest);
-        let { currency, terminal, budget, date, terminalDest, resultsNumber, return_date, direct } = this.props;
-        this.props.SET_RESULTS(currency, terminal, budget, date, terminalDest, resultsNumber, return_date, direct);
-
+        let access_token =  await this.AmadeusApi();
+        this.props.INIT_AMADEUS(access_token);
+        const config = {
+            headers: {
+                "Authorization": "Bearer " + access_token
+            }
+        }
+        const url = `https://test.api.amadeus.com/v1/shopping/flight-offers?origin=${this.props.terminal}&destination=${this.props.terminalDest}&maxPrice=${this.props.budget}&currency=${this.props.currency}&nonStop=${this.props.direct}&departureDate=${this.props.date}&returnDate=${this.props.return_date}`;
+        var that = this;
+        axios.get(url, config)
+            .then(function (response) {
+                console.log(response.data.data);
+                that.props.SET_RESULTS('SET_RESULTS', response.data.data);
+                //init collapsible currency
+                M.Collapsible.init(document.querySelectorAll('.collapsible'));
+            })
+            .catch(function (error) {
+                console.log(error);
+                that.props.SET_RESULTS('RESULTS_ERROR', error);
+            });
 
     }
 
     filter() {
-        let { currency, terminal, budget, date, terminalDest, resultsNumber, return_date, direct } = this.props;
+       // let { currency, terminal, budget, date, terminalDest, resultsNumber, return_date, direct } = this.props;
         // this.props.SET_RESULTS( currency,terminal ,budget,date,terminalDest,resultsNumber,return_date,direct);    }
     }
     render() {
@@ -48,34 +70,34 @@ class Results extends React.Component {
             {this.props.error ? <div className="error red">   Error : {this.props.error}</div> : ''}
             <div className="row">
                 {this.props.results.map((result, index) => {
-                    return (result.itineraries.map((r, i) => {
+                    return (result.offerItems.map((r, i) => {
                         return (
-                            <ul className="collapsible col-12 z-depth-3" key={i}>
+                            <ul className="collapsible col-12 z-depth-3" key={index}>
                                 <li>
                                     <div className="collapsible-header infoBody row">
-                                     
+
                                         {/*outbound */}
                                         <p className="col-2 companyLogo">
                                             <img
-                                                src={`http://pics.avs.io/100/30/${r.outbound.flights[0].operating_airline}.png`}
+                                                src={`http://pics.avs.io/100/30/${r.services[0].segments[0].flightSegment.operating.carrierCode}.png`}
                                                 alt='logo' />
                                         </p>
                                         <div className="col-3 relative">
                                             <span>
-                                                <b>{r.outbound.flights[0].origin.airport}</b>
+                                                <b>{r.services[0].segments[0].flightSegment.departure.iataCode}</b>
                                             </span>
-                                            <span>{splitHour(r.outbound.flights[0].departs_at)}</span>
+                                            <span>{splitHour(r.services[0].segments[0].flightSegment.departure.at)}</span>
                                             <i className="material-icons fa-rotate-90">airplanemode_active</i>
                                             <span>
-                                                <b>{r.outbound.flights[r.outbound.flights.length - 1].destination.airport}</b>
+                                                <b>{r.services[r.services.length - 1].segments[0].flightSegment.arrival.iataCode}</b>
                                             </span>
-                                            <span>{splitHour(r.outbound.flights[r.outbound.flights.length - 1].arrives_at)}</span>
+                                            <span>{splitHour(r.services[r.services.length - 1].segments[0].flightSegment.arrival.at)}</span>
 
 
                                             {r.outbound.flights.length - 1 === 1 ? <div className="timeAndstops">
                                                 <i className="material-icons">alarm</i>
-                                                <span>  {calcFlightTime('local', r.outbound.flights[0].arrives_at, r.outbound.flights[r.outbound.flights.length - 1].departs_at)}</span>
-                                                <span>{r.outbound.flights.length - 1} Stops</span>
+                                                <span>  {r.services[r.services.length - 1].segments[0].flightSegment.duration}</span>
+                                                <span>{r.services[0].segments.length - 1} Stops</span>
 
                                             </div> : ''}
                                         </div>
@@ -103,13 +125,13 @@ class Results extends React.Component {
 
                                             </div> : ''}
                                         </div>
-                                        <div  className="col-2 relative">
-                                        <p className="price" >Price: <b> {result.fare.price_per_adult.total_fare}</b> </p>
+                                        <div className="col-2 relative">
+                                            <p className="price" >Price: <b> {r.price.total}</b> </p>
                                             <p className="currency">  <b>{this.props.currency} </b>  Per 1</p></div>
-                                        <div  className="col-2 relative">
-                                            <button   type="button"
+                                        <div className="col-2 relative">
+                                            <button type="button"
                                                 className="btn btn-info bookAFlight waves-effect waves-light blue lighten-1">Book Flight</button>
-                                             </div>
+                                        </div>
                                     </div>
                                     {/*body*/}
                                     <div className="collapsible-body ">
@@ -227,6 +249,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Results);
 
 function mapStateToProps(state) {
     return {
+        token: state.amadeusReducer.token,
         results: state.reducer.results,
         timezone: state.reducer.timezone,
         currency: state.reducer.currency,
@@ -242,48 +265,22 @@ function mapStateToProps(state) {
 }
 function mapDispatchToProps(dispatch) {
     return {
-        SET_RESULTS: (currency, terminal, budget, date, terminalDest, resultsNumber, return_date, direct) => {
-
+        
+        INIT_AMADEUS: (access_token) => {
+            //change rout to results with new parameters
             const action = {
-                type: 'INIT_RESULTS'
+                type: 'INIT_AMADEUS',
+                data: access_token
             };
             dispatch(action);
+        },
+        SET_RESULTS: (type, data) => {
 
-            axios
-                 //.get('./data/flights.json', {})
-                 /*
-                 To request an access token you need to send a POST request with the following body parameters to the authorization server:
-
-                    grant_type with the value client_credentials
-                    client_id with your API Key
-                    client_secret with your API Secret
-                    
-                    Both API Key and API Secret were provided to you when you created your application in the portal.
-
-                    */
-               .post('https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=LAX&oneWay=false&nonStop=false&maxPrice=2000&currency=USD', {grant_type:"",client_id:"AAi8wQ9smqr53Ef0m4zIGY5fJ1UR0gux",client_secret:"26iCTESef61KmCdc"})
-               .then(function (response) {
-                    console.log(response);
-                    const action = {
-                        type: 'SET_RESULTS',
-                        data: response.data.results
-                    };
-                    dispatch(action);
-                    //init collapsible currency
-                    M
-                        .Collapsible
-                        .init(document.querySelectorAll('.collapsible'));
-                })
-                .catch(function (error) {
-                    console.log(error);
-
-                    const action = {
-                        type: 'RESULTS_ERROR',
-                        data: JSON.stringify(error)
-                    };
-                    dispatch(action);
-
-                });
+            const action = {
+                type: type,
+                data: data
+            };
+            dispatch(action);
 
         },
         TIMEZONE: (terminal, terminalDest) => {

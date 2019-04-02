@@ -1,21 +1,24 @@
 import { combineReducers, createStore } from 'redux';
+import moment from 'moment';
+let origin_timezone = moment().format('YYYY-MM-DD');
+let destination_timezone = moment().add(7, 'days').format('YYYY-MM-DD');
 
 const initialState = {
     terminals: [],
     terminal: "TLV",
     terminalDest: "LAX",
     currency: "USD",
-    date:'',
-    return_date: '',
-    budget: 0,
+    date:origin_timezone,
+    return_date: destination_timezone,
+    budget: 2000,
     submit: false,
     error: "",
     direct: false,
     results: [],
     resultsNumber: 10,
     timezone: {
-        'origin_timezone': 0,
-        'destination_timezone': 0
+        'origin_timezone': '',
+        'destination_timezone': ''
     }
 }
 const reducer = (state = initialState, action) => {
@@ -66,21 +69,21 @@ const reducer = (state = initialState, action) => {
     }
 }
 
-const initialState2 = {
-    terminals2: [],
+const amadeusState = {
+    token: '',
 }
-const searchReducer = (state = initialState2, action) => {
+const amadeusReducer = (state = amadeusState, action) => {
     switch (action.type) {
-        case 'CHECK':
-            return Object.assign({}, state, { submit: action.data });
+        case 'INIT_AMADEUS':
+            return Object.assign({}, state, { token: action.data });
         default:
             return state
     }
 }
 const reducers = combineReducers({
     reducer,
-    searchReducer
+    amadeusReducer
 })
-const store = createStore(reducers);
+const store = createStore(reducers,window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
 
 export default store;

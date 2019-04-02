@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import M from 'materialize-css';
 import logo from '../content/images/logo.png';
-import { MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink,  MDBIcon } from "mdbreact";
+import { MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 
 
@@ -14,7 +14,7 @@ class Header extends Component {
             collapseID: ""
         };
     }
-    componentDidMount() {
+    async componentDidMount() {
         M.Sidenav.init(document.querySelectorAll('.sidenav'));
     }
     toggleCollapse = collapseID => () =>
@@ -26,8 +26,8 @@ class Header extends Component {
         return (
             <div className="navBarHeader">
                 <MDBNavbar style={{ marginTop: "20px" }} dark>
-                    
-                <Link to="/"><button href="#" className="brand-logo"><img alt="logo" src={logo} /></button></Link>
+
+                    <Link to="/"><button href="#" className="brand-logo"><img alt="logo" src={logo} /></button></Link>
                     <MDBNavbarNav right>
                         <MDBNavItem>
                             <MDBNavLink className="waves-effect waves-light" to="http://RoniChabra.com">

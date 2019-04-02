@@ -4,15 +4,13 @@ import store from './store/';
 import Search from './components/Search';
 import Results from './components/Results';
 import Header from './components/Header';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-
+import { BrowserRouter as Router, Route } from 'react-router-dom';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "bootstrap-css-only/css/bootstrap.min.css";
 import "mdbreact/dist/css/mdb.css";
 import './App.css';
 
 class App extends Component {
-
     render() {
         return (
             <Provider store={store}>

@@ -69,7 +69,6 @@ class Search extends Component {
 }
 
 function mapStateToProps(state) {
-    console.log(state.reducer);
     return {
         currency: state.reducer.currency,
         budget: state.reducer.budget,
