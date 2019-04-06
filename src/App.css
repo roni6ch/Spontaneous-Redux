@@ -119,7 +119,7 @@ input{color:#000;
     width:100%; float:left;
 }
 .collapsible{
-    background: #ccccccad;
+    background: rgba(255, 255, 255, 0.90);
     margin: 1% 0% 0% 0% !important;
     cursor: pointer;
 }
@@ -133,38 +133,48 @@ ul:not(.browser-default){    margin: 0px;}
 .react-autosuggest__suggestions-list li:hover {
     opacity: 0.8;
 }
-/*spinner*/
-.lds-hourglass {
-    display: inline-block;
-    position: relative;
-    width: 64px;
-    height: 64px;
+/*spinner*/.spinner {
+  width: 40px;
+  height: 40px;
+
+  position: relative;
+  margin: 100px auto;
 }
-.lds-hourglass:after {
-    content: " ";
-    display: block;
-    border-radius: 50%;
-    width: 0;
-    height: 0;
-    margin: 6px;
-    box-sizing: border-box;
-    border: 26px solid #cef;
-    border-color: #cef transparent #cef transparent;
-    animation: lds-hourglass 1.2s infinite;
+
+.double-bounce1, .double-bounce2 {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background-color: #fff;
+  opacity: 0.6;
+  position: absolute;
+  top: 0;
+  left: 0;
+  
+  -webkit-animation: sk-bounce 2.0s infinite ease-in-out;
+  animation: sk-bounce 2.0s infinite ease-in-out;
 }
-@keyframes lds-hourglass {
-    0% {
-        transform: rotate(0);
-        animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
-    }
-    50% {
-        transform: rotate(900deg);
-        animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
-    }
-    100% {
-        transform: rotate(1800deg);
-    }
+
+.double-bounce2 {
+  -webkit-animation-delay: -1.0s;
+  animation-delay: -1.0s;
 }
+
+@-webkit-keyframes sk-bounce {
+  0%, 100% { -webkit-transform: scale(0.0) }
+  50% { -webkit-transform: scale(1.0) }
+}
+
+@keyframes sk-bounce {
+  0%, 100% { 
+    transform: scale(0.0);
+    -webkit-transform: scale(0.0);
+  } 50% { 
+    transform: scale(1.0);
+    -webkit-transform: scale(1.0);
+  }
+}
+
 input[type=number]:not(.browser-default),
 input[type=text]:not(.browser-default),
 select {
@@ -187,6 +197,12 @@ label , .col.input-field label{color:#fff;}
     .wrapper {
         width: 95%;
     }
+    .stamp{
+        top:0;
+    right: 0;
+    }
+    .fa-rotate-90{display:none;}
+
 }
 .submit button{
     float:right;
@@ -225,7 +241,7 @@ label , .col.input-field label{color:#fff;}
 }
 .nav-item{
     float: right;
-    padding: 0px 10px;   
+    padding: 8px 10px;   
 }
 .fab{
     color: #fff;
@@ -237,4 +253,28 @@ label , .col.input-field label{color:#fff;}
 .searchBox{
     display: block;
     width: 600px;
+    background: rgba(204, 204, 204, 0.74);
 }
+.iataCode{
+    
+    padding: 0px 0px 7px;
+}
+.priceAbs{
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.stamp {
+    background:url(content/images/stamp.png) no-repeat; 
+    position: absolute;
+    top: 133px;
+    right: -54px;
+    width: 100px;
+    height: 100px;
+  }
+  span.price {
+    margin-top: 25px;
+    display: block;
+}
+.collapsible-header hr{margin:0px;}
+.infoBody{padding:1%;}

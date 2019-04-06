@@ -1,15 +1,15 @@
 import { combineReducers, createStore } from 'redux';
 import moment from 'moment';
-let origin_timezone = moment().format('YYYY-MM-DD');
-let destination_timezone = moment().add(7, 'days').format('YYYY-MM-DD');
+let origin_time = moment().format('YYYY-MM-DD');
+let destination_time= moment().add(7, 'days').format('YYYY-MM-DD');
 
 const initialState = {
     terminals: [],
     terminal: "TLV",
     terminalDest: "LAX",
     currency: "USD",
-    date:origin_timezone,
-    return_date: destination_timezone,
+    date:origin_time,
+    return_date: destination_time,
     budget: 2000,
     submit: false,
     error: "",
@@ -24,7 +24,7 @@ const initialState = {
 const reducer = (state = initialState, action) => {
     switch (action.type) {
         case 'INIT':
-            return Object.assign({}, state, { submit: action.data });
+            return Object.assign({}, state, { submit: action.data , error: ""});
         case 'INIT_RESULTS':
             return Object.assign({}, state, { results: [], error: "" });
         case 'RESULTS_ERROR':

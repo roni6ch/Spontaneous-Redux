@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import DatePicker from 'react-datepicker';
-
+import moment from 'moment';
 import 'react-datepicker/dist/react-datepicker.css';
 
 
@@ -37,7 +37,7 @@ class DatePicker1 extends React.Component {
           <i className="material-icons">date_range</i>
         </div>
         <div className="col-5 p-0">
-          
+        
           <DatePicker name="date" autoComplete="off" require="true"
           placeholderText="Date" 
               selected={this.props.dateInput === "date" ? this.state.startDate : this.state.endDate} 
@@ -61,7 +61,7 @@ function mapDispatchToProps(dispatch) {
           dispatch(action);
       }, 
       SET_DATE: (date , dateInput) => {
-        const action = { type: 'SET_DATE', data: date , dateInput : dateInput };
+        const action = { type: 'SET_DATE', data: moment(date).format('YYYY-MM-DD') , dateInput : dateInput };
         dispatch(action);
     }
 

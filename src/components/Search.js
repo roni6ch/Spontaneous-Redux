@@ -2,23 +2,25 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import './search.css';
-
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
 import AutoCompleteTeminals from './AutoCompleteTeminals';
-import DatePicker1 from './DatePicker';
 import Currency from './Currency';
 import Budget from './Budget';
-import ResultsNumber from './ResultsNumber';
-import Direct from './Direct';
 import { MDBBtn, MDBIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 import logo from '../content/images/logo.png';
 import { Redirect } from 'react-router';
+import moment from 'moment';
 
+var i = 0;
 class Search extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            redirectToReferrer: false
+            redirectToReferrer: false,
+            startDate: null,
+            endDate: null
         }
         this.props.initState();
     }
@@ -26,13 +28,24 @@ class Search extends Component {
     componentDidMount() {
         this.props.GET_TERMINALS();
     }
+    dateChange = (date, dateInput) => {
+        if (dateInput === 'date')
+            this.setState({
+                startDate: date
+            });
+        else
+            this.setState({
+                endDate: date
+            });
+        this.props.SET_DATE(date, dateInput);
+    }
     render() {
         if (this.props.submit === true) {
             return <Redirect to="/results" />
         }
         return (
             <div className="Search">
-                <form onSubmit={(e) => { this.props.SUBMIT(e) }}>
+                <form onSubmit={(e) => { this.props.SUBMIT(e) }}  autoComplete="off">
                     <div className="searchBox container p-4">
                         <img src={logo} alt="logo" className="logo" />
                         <div className="row">
@@ -42,14 +55,42 @@ class Search extends Component {
 
                         </div>
                         <div className="row pt-4 pb-4">
-                            <DatePicker1 dateInput="date" />
-                            <DatePicker1 dateInput="returnDate" />
+
+                            <div className="col-1 p-0">
+                                <i className="material-icons">date_range</i>
+                            </div>
+                            <div className="col-5 p-0">
+                                <DatePicker placeholderText="Start Date"
+                                    id="startDate"
+                                    selected={this.state.startDate}
+                                    selectsStart
+                                    minDate={moment()}
+                                    startDate={this.state.startDate}
+                                    endDate={this.state.endDate}
+                                    onChange={(date) => this.dateChange(date, 'date')}
+                                />
+                            </div>
+
+                            <div className="col-1 p-0">
+                                <i className="material-icons">date_range</i>
+                            </div>
+                            <div className="col-5 p-0">
+                                <DatePicker placeholderText="End Date"
+                                    id="endDate"
+                                    selected={this.state.endDate}
+                                    minDate={this.state.startDate}
+                                    selectsEnd
+                                    startDate={this.state.startDate}
+                                    endDate={this.state.endDate}
+                                    onChange={(date) => this.dateChange(date, 'return_date')}
+                                />
+                            </div>
                         </div>
                         <div className="row">
                             <Currency />
                             <Budget />
-                            <ResultsNumber />
-                            <Direct />
+                            {/*<ResultsNumber /> 
+                            <Direct />*/}
                         </div>
 
                         <div className="row">
@@ -107,6 +148,10 @@ function mapDispatchToProps(dispatch) {
                     console.log(error);
                 });
 
+        },
+        SET_DATE: (date, dateInput) => {
+            const action = { type: 'SET_DATE', data: moment(date).format('YYYY-MM-DD'), dateInput: dateInput };
+            dispatch(action);
         },
         SUBMIT: (e) => {
             e.preventDefault();

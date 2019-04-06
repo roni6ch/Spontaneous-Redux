@@ -44,7 +44,10 @@ margin-top: 3%;
   .searchBox .s1 .material-icons{
 margin-top: 15px;
 }
-
+.table-bordered{
+background: #ccccccad;
+}
+.hidden{display:none}
 
 @media only screen and (max-width: 640px) {
     .Search .container{

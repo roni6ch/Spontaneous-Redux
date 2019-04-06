@@ -30,24 +30,21 @@ class Header extends Component {
                     <Link to="/"><button href="#" className="brand-logo"><img alt="logo" src={logo} /></button></Link>
                     <MDBNavbarNav right>
                         <MDBNavItem>
-                            <MDBNavLink className="waves-effect waves-light" to="http://RoniChabra.com">
-                                <MDBIcon fab icon="google-plus-g" />
-                            </MDBNavLink>
+                                <a href="http://RoniChabra.com" className="waves-effect waves-light" >
+                                <MDBIcon fab icon="google-plus-g" /></a>
                         </MDBNavItem>
                         <MDBNavItem>
-                            <MDBNavLink className="waves-effect waves-light" to="https://www.facebook.com/roni6ch">
-                                <MDBIcon fab icon="facebook" />
-                            </MDBNavLink>
+                            <a href="https://www.facebook.com/roni6ch" className="waves-effect waves-light" >
+                                <MDBIcon fab icon="facebook" /></a>
                         </MDBNavItem>
                         <MDBNavItem>
-                            <MDBNavLink className="waves-effect waves-light" to="https://www.linkedin.com/in/roni-chabra-61698558">
-                                <MDBIcon fab icon="linkedin" />
-                            </MDBNavLink>
+                            <a href="https://www.linkedin.com/in/roni-chabra-61698558" className="waves-effect waves-light" >
+                                <MDBIcon fab icon="linkedin" /></a>
                         </MDBNavItem>
                         <MDBNavItem>
-                            <MDBNavLink className="waves-effect waves-light" to="https://gitlab.com/users/Roni691986/projects">
-                                <MDBIcon fab icon="gitlab" />
-                            </MDBNavLink>
+                        <a href="https://gitlab.com/users/Roni691986/projects" className="waves-effect waves-light" >
+                                <MDBIcon fab icon="gitlab" /></a>
+                           
                         </MDBNavItem>
                     </MDBNavbarNav>
                 </MDBNavbar>

@@ -24,8 +24,6 @@
     border-bottom: 0px;
     border-top: 0px;
   }
-  .collapsible-body{
-    background: #ccccccad;}
   .collapsible-header i{margin-right:0px;}
   .collapsible-body .col{text-align: center}
   .timeAndstops , .connectionTime {
