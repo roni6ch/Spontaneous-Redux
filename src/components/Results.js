@@ -3,12 +3,10 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import './results.css';
 import { AmadeusApi } from './Amadeus';
-import { MDBDataTable } from 'mdbreact';
 import { MDBContainer, MDBBtn, MDBModal, MDBModalBody, MDBModalHeader, MDBModalFooter } from 'mdbreact';
 import _ from 'lodash';
-
-
-
+import Sidenav from './Sidenav'
+import 'bootstrap';
 function splitHour(date) {
     if (date !== null && date !== undefined) {
         var dateVal = date.split('T')[1];
@@ -64,6 +62,10 @@ function calcFlightDuration(duration) {
     var days = Number(duration.split("D")[0]) > 0 ? Number(duration.split("D")[0]) : "";
     var hours = Number(duration.split("T")[1].split("H")[0]) > 0 ? Number(duration.split("T")[1].split("H")[0]) : "";
     var minutes = Number(duration.split("T")[1].split("H")[1].split("M")[0]) > 0 ? Number(duration.split("T")[1].split("H")[1].split("M")[0]) : "";
+    if (hours === "")
+        hours = "0";
+    if (minutes === "")
+    minutes = "0";
     if (days > 0)
         return days + 'd ' + hours + 'h ' + minutes + 'm ';
     else
@@ -90,6 +92,7 @@ class Results extends React.Component {
         }
     }
     async componentDidMount() {
+
         this.setState({ loader: true })
         this.props.TIMEZONE(this.props.terminal, this.props.terminalDest);
         let access_token = await this.AmadeusApi();
@@ -107,8 +110,6 @@ class Results extends React.Component {
                 console.log(response.data.data);
                 that.props.SET_RESULTS('SET_RESULTS', response.data.data);
                 that.setState({ loader: false })
-                //init collapsible currency
-                //  M.Collapsible.init(document.querySelectorAll('.collapsible'));
             })
             .catch(function (error) {
                 console.log(error);
@@ -133,74 +134,30 @@ class Results extends React.Component {
         }, ['asc']);
         this.props.SET_RESULTS('SET_RESULTS', results);
       }
+      if (sorting === "direct"){
+        let results = _.orderBy(this.props.results, function(result) {
+            let x =   _.find(result.offerItems[0].services, function(service) {
+                return service.segments.length === 1; 
+            });
+
+            console.log(x);
+            return x;
+      }, ['asc']);
+          this.props.SET_RESULTS('SET_RESULTS', results);
+        }
       if (sorting === "duration"){
         let results = _.orderBy(this.props.results, function(result) {
-                let sum =  _.sumBy(result.offerItems[0].services, function(service) {
+                return _.sumBy(result.offerItems[0].services, function(service) {
                     return _.sumBy(service.segments, function(seg) {
                             return calcTotalFlightDuration(seg.flightSegment.duration);
                     });
                 });
-                return sum;
           }, ['asc']);
           this.props.SET_RESULTS('SET_RESULTS', results);
         }
     }
 
     render() {
-        const data = {
-            columns: [
-                {
-                    label: 'Logo',
-                    field: 'logo',
-                },
-                {
-                    label: 'From',
-                    field: 'from',
-                },
-                {
-                    label: 'To',
-                    field: 'to',
-                },
-                {
-                    label: 'Price',
-                    field: 'price',
-                },
-                {
-                    label: 'Stops',
-                    field: 'stops',
-                },
-                {
-                    label: 'Seats',
-                    field: 'seats',
-                },
-                {
-                    label: 'Class',
-                    field: 'class',
-                },
-                {
-                    label: 'Book',
-                    field: 'book',
-                }
-            ],
-            rows: []
-        };
-
-        let results = [];
-        this.props.results.forEach((res, i) => {
-            res.offerItems.forEach((r, i) => {
-                let result = {};
-                result.logo = <img src={`http://pics.avs.io/100/30/${r.services[0].segments[0].flightSegment.operating.carrierCode}.png`} alt="logo" />;
-                result.from = r.services[0].segments[0].flightSegment.departure.iataCode;
-                result.to = r.services[0].segments[r.services[0].segments.length - 1].flightSegment.arrival.iataCode;
-                result.price = r.price.total;
-                result.stops = r.services[0].segments.length - 1;
-                result.seats = r.services[0].segments[0].pricingDetailPerAdult.availability;
-                result.class = r.services[0].segments[0].pricingDetailPerAdult.travelClass;
-                result.book = <button type="button" className="btn btn-sm btn-info bookAFlight waves-effect waves-light blue lighten-1">Book Flight</button>;
-                results.push(result);
-            });
-        });
-        data.rows = results;
 
         if (this.props.error !== "")
             return <div className="error red">   Error : {this.props.error}</div>
@@ -211,18 +168,40 @@ class Results extends React.Component {
                     <div className="double-bounce2"></div>
                 </div>
             </div>
-        else return <div className="resultsWrapper">
+        else return  <React.Fragment>
+            <div className="collapsible sidenavWrapper">
 
+            <p>
+            <button className="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                Sort By
+            </button>
+            </p>
+            <div className="collapse" id="collapseExample">
+            <div className="card card-body">
+             
+            <div className="radio">
+                <input id="radio-1" name="radio" type="radio" />
+                <label htmlFor="radio-1" className="radio-label" onClick={this.sort("price")}>Price</label>
+            </div>
 
-            <button onClick={this.sort("price")}>Sort by price</button>
-            <button onClick={this.sort("duration")}>Sort by duration</button>
+            <div className="radio">
+                <input id="radio-2" name="radio" type="radio" />
+                <label  htmlFor="radio-2" className="radio-label"  onClick={this.sort("duration")}>Duration</label>
+            </div>
+
+            </div>
+            </div>
+
+            <MDBBtn color="primary" onClick={this.sort("direct")}>Sort by Direct Flight</MDBBtn>
+            </div>
+        <div className="resultsWrapper">
             <div className="row">
                 {this.props.results.map((result, index) => {
                     return (result.offerItems.map((r, i) => {
                         return (
                             <ul className="collapsible col-12 z-depth-3" key={index} id={result.id} onClick={this.toggle(8, result)}>
                                 <li>
-                                    <div className="collapsible-header infoBody row">
+                                    <div className="infoBody row">
                                         <p className="col-2 p-0">
                                             <img src={`http://pics.avs.io/100/30/${r.services[0].segments[0].flightSegment.operating.carrierCode}.png`} alt='logo' />
                                         </p>
@@ -260,6 +239,7 @@ class Results extends React.Component {
                                     </div>
                                 </li>
                                 <li>
+                                    {r.services[r.services.length - 1].segments.length > 0 ? 
                                     <div className="collapsible-header infoBody row">
                                         <p className="col-2 p-0">
                                             <img src={`http://pics.avs.io/100/30/${r.services[r.services.length - 1].segments[r.services[r.services.length - 1].segments.length - 1].flightSegment.operating.carrierCode}.png`} alt='logo' />
@@ -296,7 +276,7 @@ class Results extends React.Component {
                                         <div className="col-3 p-0">
                                             <button type="button" className="btn btn-info bookAFlight waves-effect waves-light blue lighten-1">Book Flight</button>
                                         </div>
-                                    </div>
+                                    </div> :""}
 
                                 </li>
                             </ul>)
@@ -359,6 +339,7 @@ class Results extends React.Component {
             </MDBContainer>
 
         </div>
+        </React.Fragment>
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Results);

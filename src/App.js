@@ -21,7 +21,6 @@ class App extends Component {
                             <video className="video-intro" autoPlay loop muted>
                                 <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
                             </video>
-
                             <div className="wrapper">
                                 <Route path="/" exact  component={Search} />
                                 <Route path="/results" component={Results} />
