@@ -15,6 +15,9 @@ const initialState = {
     error: "",
     direct: false,
     results: [],
+    result:{
+        offerItems : []
+    },
     resultsNumber: 10,
     timezone: {
         'origin_timezone': '',
@@ -60,7 +63,9 @@ const reducer = (state = initialState, action) => {
 
         case 'SET_RESULTS':
             return Object.assign({}, state, { results: action.data });
-
+        case 'SET_FLIGHT':
+            return Object.assign({}, state, { result: action.data });
+            
         case 'TIMEZONE':
             return Object.assign({}, state, { timezone: action.data });
 

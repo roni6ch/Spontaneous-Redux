@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import M from 'materialize-css';
 import logo from '../content/images/logo.png';
-import { MDBNavbar, MDBNavbarNav, MDBNavItem, MDBNavLink, MDBIcon } from "mdbreact";
+import { MDBNavbar, MDBNavbarNav, MDBNavItem, MDBIcon } from "mdbreact";
 import { Link } from 'react-router-dom';
 
 
@@ -30,19 +30,19 @@ class Header extends Component {
                     <Link to="/"><button href="#" className="brand-logo"><img alt="logo" src={logo} /></button></Link>
                     <MDBNavbarNav right>
                         <MDBNavItem>
-                                <a href="http://RoniChabra.com" className="waves-effect waves-light" >
+                                <a href="http://RoniChabra.com" target="_blank" className="waves-effect waves-light" >
                                 <MDBIcon fab icon="google-plus-g" /></a>
                         </MDBNavItem>
                         <MDBNavItem>
-                            <a href="https://www.facebook.com/roni6ch" className="waves-effect waves-light" >
+                            <a href="https://www.facebook.com/roni6ch" target="_blank" className="waves-effect waves-light" >
                                 <MDBIcon fab icon="facebook" /></a>
                         </MDBNavItem>
                         <MDBNavItem>
-                            <a href="https://www.linkedin.com/in/roni-chabra-61698558" className="waves-effect waves-light" >
+                            <a href="https://www.linkedin.com/in/roni-chabra-61698558" target="_blank" className="waves-effect waves-light" >
                                 <MDBIcon fab icon="linkedin" /></a>
                         </MDBNavItem>
                         <MDBNavItem>
-                        <a href="https://gitlab.com/users/Roni691986/projects" className="waves-effect waves-light" >
+                        <a href="https://gitlab.com/users/Roni691986/projects" target="_blank" className="waves-effect waves-light" >
                                 <MDBIcon fab icon="gitlab" /></a>
                            
                         </MDBNavItem>

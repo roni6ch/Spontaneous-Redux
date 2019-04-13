@@ -26,10 +26,10 @@
   }
   .collapsible-header i{margin-right:0px;}
   .collapsible-body .col{text-align: center}
-  .timeAndstops , .connectionTime {
+  .timeAndstops, .connectionTime {
     text-align: center;
     color: rgb(0, 63, 113);
-    font-size: 1rem;
+    font-size: 12px;
     margin-top: 10px;
     width:100%;
     text-align: center;
@@ -49,7 +49,6 @@
 .collapsible-headerspan {
   margin: 0px 2px;
 }
-.companyLogo{    margin-top: 18px;}
 input[type=text]:not(.browser-default) , input[type=number]:not(.browser-default){
   height: 2rem;
 }
@@ -78,8 +77,55 @@ input[type=text]:not(.browser-default) , input[type=number]:not(.browser-default
   .collapsible{
     margin: 1px 0px !important;
   }
-  .timeAndstops, .connectionTime{font-size:12px;}
   .hideMobile{display:none;}
 }
 
+
+.flightDetails{
+  text-align: left;
+}
+.travelClass{
+  text-transform: lowercase;
+  display: inline-flex;
+}
+p .travelClass b:first-letter{
+  text-transform: capitalize;
+}
+
+.flightDetails p {
+  margin-bottom:5px;
+}
+.direct{color:green; font-weight: bold}
+
+.triangle {
+  display: inline-block;
+  margin: 0;
+  vertical-align: middle;
+}
+.triangle-1 {
+  width: 80px;
+  height: 80px;
+  border-bottom: solid 40px transparent;
+  border-left: solid 40px transparent;
+  border-right:  solid 40px #4285f4 ;
+  border-top:  solid 40px #4285f4 ;
+  position: absolute;
+  top:0;
+  right:0;
+}
+.triangle span{
+  position: absolute;
+  top: -19px;
+  left: -24px;
+  color: #fff;
+  transform: rotate(45deg);
+}
+.flightWrapper{
+  position:relative;
+}
+
+.modal-body{padding:0 !important;}
+hr{margin:0 !important;padding:0 !important;}
+.companyLogo{padding: 10px;
+  margin-bottom: 0;}
 
