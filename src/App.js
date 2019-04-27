@@ -15,15 +15,15 @@ class App extends Component {
         return (
             <Provider store={store}>
                 <div className="App">
-                    <Router >
+                    <Router  basename={process.env.PUBLIC_URL}>
                         <div>
                             <Header />
                             <video className="video-intro" autoPlay loop muted>
-                                <source src="https://mdbootstrap.com/img/video/Tropical.mp4" type="video/mp4" />
+                                <source src={require('./content/images/Tropical.mp4')} type="video/mp4" />
                             </video>
                             <div className="wrapper">
                                 <Route path="/" exact  component={Search} />
-                                <Route path="/results" component={Results} />
+                                <Route path="/results/" component={Results} />
                             </div>
                         </div>
                     </Router>

@@ -12,6 +12,7 @@ import { Link } from 'react-router-dom';
 import logo from '../content/images/logo.png';
 import { Redirect } from 'react-router';
 import moment from 'moment';
+import { GetToken } from './Amadeus';
 
 var i = 0;
 class Search extends Component {
@@ -25,8 +26,12 @@ class Search extends Component {
         this.props.initState();
     }
 
-    componentDidMount() {
-        this.props.GET_TERMINALS();
+    async componentDidMount() {
+        //this.props.GET_TERMINALS();
+        this.GetToken = await GetToken.bind(this);
+        let access_token = await this.GetToken();
+        
+        console.log(access_token);
     }
     dateChange = (date, dateInput) => {
         if (dateInput === 'date')
@@ -110,6 +115,7 @@ class Search extends Component {
 }
 
 function mapStateToProps(state) {
+    console.log(state.reducer);
     return {
         currency: state.reducer.currency,
         budget: state.reducer.budget,

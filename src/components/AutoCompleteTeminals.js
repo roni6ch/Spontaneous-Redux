@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import Autosuggest from 'react-autosuggest';
 import './autocomplete.css';
 
+import axios from 'axios';
+
 class AutoCompleteTeminals extends React.Component {
   constructor() {
     super();
@@ -10,49 +12,70 @@ class AutoCompleteTeminals extends React.Component {
     this.state = {
       value: '',
       suggestions: [],
+      selectedOption: null,
+      data: [],
+      clickOnSelect: false
     };
   }
 
   onChange = (event, { newValue, method }) => {
+    console.log(newValue);
     this.setState({
       value: newValue
+    },()=>{
+      
+    const config = {
+      headers: {
+          "Authorization": "Bearer " + localStorage.getItem("token")
+      }
+  }
+  var that  = this;
+  if(this.state.value !== "" && this.state.value.length > 2 && !this.state.clickOnSelect){
+    let url2 = `https://test.api.amadeus.com/v1/reference-data/locations?subType=CITY&keyword=${this.state.value}&page[limit]=10&page[offset]=0&sort=analytics.travelers.score&view=LIGHT`;
+      axios.get(url2, config).then(function (response) {
+        let data = [];
+        let search = that.state.value.toLowerCase();
+        response.data.data.forEach((result, index) => {
+          data.push({
+            value: result.name, label: result.iataCode
+          });
+        });
+        console.log(data);
+        
+        if (search ==="tlv" || search ==="bgu" || search ==="tel"){
+          data.push({value: 'Tel Aviv',label:'TLV'});
+        }
+        that.setState({suggestions:data});
+       
+    })
+    .catch(function (error) {
+        localStorage.removeItem("token");
+        console.log(error);
+    });
+  }
     });
   };
   getSuggestionValue = (suggestion) => {
     this.props.placeholder === 'Origin' ? 
-    this.props.SET_TERMINAL(suggestion.name) :
-    this.props.SET_TERMINAL_DEST(suggestion.name)
-    return suggestion.name;
+    this.props.SET_TERMINAL(suggestion.label) :
+    this.props.SET_TERMINAL_DEST(suggestion.label)
+    this.setState({clickOnSelect:true});
+    return suggestion.value;
   }
   renderSuggestion = (suggestion) => {
     return (
-      <span>{suggestion.name}</span>
+      <span>{suggestion.label} - {suggestion.value}</span>
     );
   }
   onSuggestionsFetchRequested = ({ value }) => {
-    this.setState({
-      suggestions: this.getSuggestions(value)
-    });
   };
 
   onSuggestionsClearRequested = () => {
-    this.setState({
-      suggestions: []
-    });
   };
-  escapeRegexCharacters = (str) => {
-    return str.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-  }
-  getSuggestions = (value) => {
-    const escapedValue = this.escapeRegexCharacters(value.trim());
+  getSuggestions = () => {
 
-    if (escapedValue === '') {
-      return [];
-    }
-
-    const regex = new RegExp('^' + escapedValue, 'i');
-
-    return this.props.terminals.filter(terminal => regex.test(terminal.name));
+   // return this.props.terminals.filter(terminal => regex.test(terminal.name));
+   return this.state.data.filter(terminal => terminal.name);
   }
 
   render() {
@@ -63,12 +86,14 @@ class AutoCompleteTeminals extends React.Component {
       onChange: this.onChange
     };
 
+
     return (
       <React.Fragment>
         <div className="col-1 p-0">
           <i className="material-icons">place</i>
         </div>
         <div className="col-5 autocomplete p-0">
+
           <Autosuggest
             suggestions={suggestions}
             onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}

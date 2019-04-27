@@ -22,6 +22,7 @@ function AmadeusApi() {
     formBody = formBody.join("&");
     return new Promise((resolve, reject) => {
         axios.post(url, formBody, config).then((response) => {
+            localStorage.setItem("token",response.data.access_token);
             resolve(response.data.access_token)
         }).catch((err) => {
             reject(err);
@@ -32,7 +33,12 @@ function AmadeusApi() {
 
  function GetToken() {
    //return AmadeusApi();
+   let token = localStorage.getItem("token");
+   if (token !== null){
+       return token;
+   }
+   else return AmadeusApi();
 }
 
 
-export { GetToken , AmadeusApi }
+export { GetToken  }

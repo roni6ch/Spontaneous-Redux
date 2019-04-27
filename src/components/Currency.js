@@ -12,7 +12,7 @@ class Currency extends Component {
     }
     render() {
         return (
-            <div className="col-2">
+            <div className="col-4 currency">
 
                 <select className="browser-default custom-select"
                     name="currency"

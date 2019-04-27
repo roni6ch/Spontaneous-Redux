@@ -38,9 +38,9 @@ const reducer = (state = initialState, action) => {
         case 'SET_TERMINALS':
             return Object.assign({}, state, { terminals: action.data });
         case 'SET_TERMINAL':
-            return Object.assign({}, state, { terminal: action.data.split("-")[0].trim() });
+            return Object.assign({}, state, { terminal: action.data });
         case 'SET_TERMINAL_DEST':
-            return Object.assign({}, state, { terminalDest: action.data.split("-")[0].trim() });
+            return Object.assign({}, state, { terminalDest: action.data });
         case 'SET_RESULTS_NUMBER':
             return Object.assign({}, state, { resultsNumber: action.data });
         case 'SET_CURRENCY':

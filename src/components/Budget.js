@@ -10,7 +10,7 @@ class Budget extends Component {
     }
     render() {
         return (
-            <div className="col s3 input-field budget pl-0">
+            <div className="col-3 input-field budget pl-0">
                 <input
                     require="true"
                     id="budget"

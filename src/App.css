@@ -215,7 +215,14 @@ label , .col.input-field label{color:#fff;}
 
 @media only screen and (max-width: 1024px) {
     .wrapper, .row{width:100%;}
-    
+    .wrapper{
+        margin-top: 100px;
+    }
+    .sidenavWrapper{    width: 100%;
+        left: 0;
+        height: auto;}
+        .radio{
+            float: left;}
   }
   
 .submit button{
@@ -262,8 +269,7 @@ label , .col.input-field label{color:#fff;}
     display: inline-block;
     width: 1.4em;
     height: 1.4em;
-    position: relative;
-    top: -0.2em;
+    position: relative;    right: -12px;
     margin-right: 1em;
     vertical-align: top;
     cursor: pointer;
@@ -306,6 +312,7 @@ label , .col.input-field label{color:#fff;}
 .nav-item{
     float: right;
     padding: 8px 10px;   
+    cursor: pointer;
 }
 .fab{
     color: #fff;
@@ -317,6 +324,7 @@ label , .col.input-field label{color:#fff;}
 .searchBox{
     display: block;
     width: 600px;
+    margin-top:15%;
     background: rgba(204, 204, 204, 0.74);
 }
 .iataCode{
@@ -342,3 +350,10 @@ label , .col.input-field label{color:#fff;}
 }
 .collapsible-header hr{margin:0px;}
 .infoBody{padding:1%;}
+
+.nav-item a i:hover {
+    -webkit-transition: color 500ms linear;
+    -o-transition: color 500ms linear;
+    transition: color 500ms linear;
+    color: #000;
+}
