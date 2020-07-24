@@ -7,7 +7,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "history": "^4.7.2",
-    "jquery": "^3.3.1",
+    "jquery": "^3.5.0",
     "lodash": "^4.17.11",
     "materialize-css": "^1.0.0",
     "mdbreact": "^4.11.0",
