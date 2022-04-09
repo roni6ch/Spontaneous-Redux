@@ -11,7 +11,7 @@
     "lodash": "^4.17.11",
     "materialize-css": "^1.0.0",
     "mdbreact": "^4.11.0",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "popper.js": "^1.14.4",
     "react": "^16.4.2",
     "react-16-bootstrap-date-picker": "^5.1.2",
